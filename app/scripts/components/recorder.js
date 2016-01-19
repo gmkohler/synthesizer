@@ -7,7 +7,9 @@ var Track = require('../util/track');
 
 var Recorder = React.createClass({
   getInitialState: function() {
-    return( { isRecording: false, track: (new Track({name: 'Gizmo'}))});
+    return( { isRecording: false,
+              isPlaying: false,
+              track: (new Track({name: 'Gizmo'}))});
   },
 
   componentDidMount: function () {
@@ -18,12 +20,16 @@ var Recorder = React.createClass({
   },
 
   toggleRecord: function() {
-    if (this.state.isRecording) {
-      this.state.track.stopRecording();
-    } else {
-      this.state.track.startRecording();
-    }
+    // if (this.state.isRecording) {
+    //   this.state.track.stopRecording();
+    // } else {
+    //   this.state.track.startRecording();
+    // }
     this.setState({isRecording: !this.state.isRecording});
+  },
+
+  togglePlay: function () {
+    this.setState({isPlaying: !this.state.isPlaying});
   },
 
   playRecording: function () {
@@ -31,13 +37,19 @@ var Recorder = React.createClass({
   },
 
   render: function () {
-    var recordButtonText = this.state.isRecording ? 'Stop Recording' : 'Record';
+
+    var recordButtonClassName = 'record-button ' +
+        (this.state.isRecording ? 'stop' : 'record');
+    var playButtonClassName = 'record-button ' +
+        (this.state.isPlaying ? 'pause' : 'play');
     // var playButtonText = 'PLAY';
     return(
       <div>
         <div id='recorder-buttons'>
-          <div className='record-button stop'></div>
-          <button onClick={this.toggleRecord}>{recordButtonText}</button>
+          <div className={recordButtonClassName}
+               onClick={this.toggleRecord}></div>
+          <div className={playButtonClassName}
+               onClick={this.togglePlay}></div>
         </div>
         <RecordingIndex />
       </div>
