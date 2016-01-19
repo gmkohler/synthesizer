@@ -4,9 +4,9 @@ var React = require('react');
 var WaveformButton = require('./waveform_button');
 
 var WAVEFORM_NAMES = {  square: 'square',
-                          sine: 'sine',
                       sawtooth: 'sawtooth',
-                      triangle: 'triangle'};
+                      triangle: 'triangle',
+                          sine: 'sine'};
 
 var WaveformSelector = React.createClass({
   isActive: function (waveType) {
