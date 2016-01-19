@@ -104,7 +104,7 @@ gulp.task('extras', function() {
 });
 
 // Watch
-gulp.task('watch', ['bundle'], function() {
+gulp.task('watch', ['bundle', 'images'], function() {
 
     browserSync({
         notify: false,
@@ -113,7 +113,7 @@ gulp.task('watch', ['bundle'], function() {
         // Note: this uses an unsigned certificate which on first access
         //       will present a certificate warning in the browser.
         // https: true,
-        server: ['dist', 'app']
+        server: ['./']
     });
 
     gulp.watch(['app/styles/**/*.scss', 'app/styles/**/*.css'], ['styles', 'scripts', reload]);
