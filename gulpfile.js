@@ -76,14 +76,6 @@ gulp.task('buildScripts', function() {
 
 
 
-// HTML
-gulp.task('html', function() {
-    return gulp.src('app/*.html')
-        .pipe($.useref())
-        .pipe(gulp.dest('dist'))
-        .pipe($.size());
-});
-
 // Images
 gulp.task('images', function() {
     return gulp.src('app/images/**/*')
@@ -96,16 +88,6 @@ gulp.task('images', function() {
         .pipe($.size());
 });
 
-// Fonts
-gulp.task('fonts', function() {
-
-    return gulp.src(require('main-bower-files')({
-            filter: '**/*.{eot,svg,ttf,woff,woff2}'
-        }).concat('app/fonts/**/*'))
-        .pipe(gulp.dest('dist/fonts'));
-
-});
-
 // Clean
 gulp.task('clean', function(cb) {
     $.cache.clearAll();
@@ -114,19 +96,19 @@ gulp.task('clean', function(cb) {
 
 // Bundle
 gulp.task('bundle', ['styles', 'scripts', 'bower'], function() {
-    return gulp.src('./app/*.html')
-        .pipe($.useref.assets())
-        .pipe($.useref.restore())
-        .pipe($.useref())
-        .pipe(gulp.dest('dist'));
+    // return gulp.src('./app/*.html')
+    //     .pipe($.useref.assets())
+    //     .pipe($.useref.restore())
+    //     .pipe($.useref())
+    //     .pipe(gulp.dest('dist'));
 });
 
 gulp.task('buildBundle', ['styles', 'buildScripts', 'moveLibraries', 'bower'], function() {
-    return gulp.src('./app/*.html')
-        .pipe($.useref.assets())
-        .pipe($.useref.restore())
-        .pipe($.useref())
-        .pipe(gulp.dest('dist'));
+    // return gulp.src('./app/*.html')
+    //     .pipe($.useref.assets())
+    //     .pipe($.useref.restore())
+    //     .pipe($.useref())
+    //     .pipe(gulp.dest('dist'));
 });
 
 // Move JS Files and Libraries
@@ -162,7 +144,7 @@ gulp.task('extras', function() {
 });
 
 // Watch
-gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
+gulp.task('watch', ['bundle'], function() {
 
     browserSync({
         notify: false,
@@ -174,22 +156,11 @@ gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
         server: ['dist', 'app']
     });
 
-    // Watch .json files
-    gulp.watch('app/scripts/**/*.json', ['json']);
-
-    // Watch .html files
-    gulp.watch('app/*.html', ['html']);
-
     gulp.watch(['app/styles/**/*.scss', 'app/styles/**/*.css'], ['styles', 'scripts', reload]);
-
-
-
-    // Watch image files
-    gulp.watch('app/images/**/*', reload);
 });
 
 // Build
-gulp.task('build', ['html', 'buildBundle', 'images', 'fonts', 'extras'], function() {
+gulp.task('build', ['buildBundle', 'images', 'extras'], function() {
     gulp.src('dist/scripts/app.js')
         .pipe($.uglify())
         .pipe($.stripDebug())
