@@ -52,7 +52,7 @@ var bundler = watchify(browserify({
 bundler.on('update', rebundle);
 bundler.on('log', $.util.log);
 
-function rebundle() {
+  function rebundle() {
     return bundler.bundle()
         // log errors if they happen
         .on('error', $.util.log.bind($.util, 'Browserify Error'))
@@ -73,9 +73,6 @@ gulp.task('buildScripts', function() {
         .pipe(gulp.dest('dist/scripts'));
 });
 
-
-
-
 // Images
 gulp.task('images', function() {
     return gulp.src('app/images/**/*')
@@ -95,46 +92,9 @@ gulp.task('clean', function(cb) {
 });
 
 // Bundle
-gulp.task('bundle', ['styles', 'scripts', 'bower'], function() {
-    // return gulp.src('./app/*.html')
-    //     .pipe($.useref.assets())
-    //     .pipe($.useref.restore())
-    //     .pipe($.useref())
-    //     .pipe(gulp.dest('dist'));
-});
+gulp.task('bundle', ['styles', 'scripts']);
 
-gulp.task('buildBundle', ['styles', 'buildScripts', 'moveLibraries', 'bower'], function() {
-    // return gulp.src('./app/*.html')
-    //     .pipe($.useref.assets())
-    //     .pipe($.useref.restore())
-    //     .pipe($.useref())
-    //     .pipe(gulp.dest('dist'));
-});
-
-// Move JS Files and Libraries
-gulp.task('moveLibraries',['clean'], function(){
-  // the base option sets the relative root for the set of files,
-  // preserving the folder structure
-  gulp.src(['./app/scripts/**/*.js'], { base: './app/scripts/' })
-  .pipe(gulp.dest('dist/scripts'));
-});
-
-
-// Bower helper
-gulp.task('bower', function() {
-    gulp.src('app/bower_components/**/*.js', {
-            base: 'app/bower_components'
-        })
-        .pipe(gulp.dest('dist/bower_components/'));
-
-});
-
-gulp.task('json', function() {
-    gulp.src('app/scripts/json/**/*.json', {
-            base: 'app/scripts'
-        })
-        .pipe(gulp.dest('dist/scripts/'));
-});
+gulp.task('buildBundle', ['styles', 'buildScripts']);
 
 // Robots.txt and favicon.ico
 gulp.task('extras', function() {
@@ -168,4 +128,4 @@ gulp.task('build', ['buildBundle', 'images', 'extras'], function() {
 });
 
 // Default task
-gulp.task('default', ['clean', 'build'  ]);
+gulp.task('default', ['clean', 'build']);
