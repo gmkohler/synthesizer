@@ -92,24 +92,24 @@ var Organ = React.createClass({
   },
 
   render: function () {
-    var that = this;
-    var keys = (Object.keys(TONES).map(function (noteName){
-      var active = that.state.pressedKeys[noteName];
+    // var that = this;
+    var keys = (Object.keys(TONES).map((noteName) => {
+      var active = this.state.pressedKeys[noteName];
       return (<Key key={noteName}
-                   handleMouseEnter={that._handleMouseEnter}
-                   handleMouseLeave={that._handleMouseLeave}
-                   handleMouseDown={that._handleMouseDown}
-                   handleMouseUp={that._handleMouseUp}
+                   handleMouseEnter={this._handleMouseEnter}
+                   handleMouseLeave={this._handleMouseLeave}
+                   handleMouseDown={this._handleMouseDown}
+                   handleMouseUp={this._handleMouseUp}
                    isActive={active}
-                   waveform={that.state.waveform}
-                   gain={that.state.gain}
-                   sustain={that.state.sustain}
-                   detune={that.state.detune}
-                   attack={that.state.attack}
-                   decay={that.state.decay}
-                   release={that.state.release}
-                   AMWaveform={that.state.AMWaveform}
-                   AMFrequency={that.state.AMFrequency}
+                   waveform={this.state.waveform}
+                   gain={this.state.gain}
+                   sustain={this.state.sustain}
+                   detune={this.state.detune}
+                   attack={this.state.attack}
+                   decay={this.state.decay}
+                   release={this.state.release}
+                   AMWaveform={this.state.AMWaveform}
+                   AMFrequency={this.state.AMFrequency}
                    noteName={noteName} />);
     }));
 
