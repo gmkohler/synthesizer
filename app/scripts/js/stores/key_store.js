@@ -23,7 +23,7 @@ var KeyStore = xtend(EventEmitter.prototype, {
     this.emit(KeyConstants.KEY_CHANGE_EVENT);
   },
 
-  DispatcherID: AppDispatcher.register(null, function (action) {
+  DispatcherID: AppDispatcher.register(function (action) {
     switch (action.actionType) {
       case KeyConstants.ADD_KEY:
         addKey(action.payload);

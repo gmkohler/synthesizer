@@ -29,7 +29,7 @@ var AudioStore = xtend(EventEmitter.prototype, {
     AudioStore.emit(AudioConstants.AUDIO_CHANGE_EVENT);
   },
 
-  DispatcherID: AppDispatcher.register(null, function (action) {
+  DispatcherID: AppDispatcher.register(function (action) {
     switch(action.actionType) {
       case AudioConstants.CHANGE_WAVEFORM:
         changeWaveform(action.payload);

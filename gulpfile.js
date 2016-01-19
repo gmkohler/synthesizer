@@ -3,8 +3,6 @@
 var gulp = require('gulp');
 var del = require('del');
 
-
-
 // Load plugins
 var $ = require('gulp-load-plugins')();
 var browserify = require('browserify');
@@ -100,12 +98,12 @@ gulp.task('images', function() {
 
 // Fonts
 gulp.task('fonts', function() {
-    
+
     return gulp.src(require('main-bower-files')({
             filter: '**/*.{eot,svg,ttf,woff,woff2}'
         }).concat('app/fonts/**/*'))
         .pipe(gulp.dest('dist/fonts'));
-    
+
 });
 
 // Clean
@@ -184,7 +182,7 @@ gulp.task('watch', ['html', 'fonts', 'bundle'], function() {
 
     gulp.watch(['app/styles/**/*.scss', 'app/styles/**/*.css'], ['styles', 'scripts', reload]);
 
-    
+
 
     // Watch image files
     gulp.watch('app/images/**/*', reload);

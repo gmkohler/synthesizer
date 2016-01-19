@@ -1,31 +1,4 @@
-body {
-    background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
-}
-
-.hero-unit {
-    margin: 50px auto 0 auto;
-    width: 300px;
-    font-size: 18px;
-    font-weight: 200;
-    line-height: 30px;
-    background-color: #eee;
-    border-radius: 6px;
-    padding: 60px;
-    h1 {
-        font-size: 60px;
-        line-height: 1;
-        letter-spacing: -1px;
-    }
-}
-
-.browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
+$ILLUMINATED_BUTTON_COLOR: #aefba1;
 
 body {
   font-family: monospace;
@@ -53,14 +26,18 @@ body {
   border-style: outset;
   border-radius: 5px;
   position: relative;
+
+  &.active {
+    border-style: inset;
+  }
+
+  span {
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+  }
 }
 
-.key span {
-  position: absolute;
-  bottom: 0;
-  left: 25%;
-
-}
 
 .cf:after {
   display: block;
@@ -68,9 +45,7 @@ body {
   content: "";
 }
 
-.key.active {
-  border-style: inset;
-}
+
 
 .black {
   position: relative;
@@ -83,10 +58,10 @@ body {
   z-index: 5;
   background-color: #221100;
   color: #FFFFFF;
-}
 
-.black span{
-  left: 20%;
+  span{
+    left: 20%;
+  }
 }
 
 .controls {
@@ -166,27 +141,32 @@ body {
   margin-left:3px;
   float:left;
   cursor:pointer;
+
+  &:first-child {
+    margin: 0;
+  }
+
+  &.active {
+    background-color: $ILLUMINATED_BUTTON_COLOR;
+  }
+
+  &#sine{
+    background-image:url('../images/sine_wave.png');
+  }
+
+  &#square{
+    background-image:url('../images/square_wave.png')
+  }
+
+  &#sawtooth{
+    background-image:url('../images/sawtooth_wave.png')
+  }
+
+  &#triangle{
+    background-image:url('../images/triangle_wave.png')
+  }
 }
 
-.waveform-button:first-child {
-  margin: 0;
-}
-.waveform-button#sine{
-  background-image:url('../assets/img/sine_wave.png');
-}
-.waveform-button#square{
-  background-image:url('../assets/img/square_wave.png')
-}
-.waveform-button#sawtooth{
-  background-image:url('../assets/img/sawtooth_wave.png')
-}
-.waveform-button#triangle{
-  background-image:url('../assets/img/triangle_wave.png')
-}
-.waveform-button.active {
-  font-weight:bold;
-  background-color: #aefba1;
-}
 
 #vertical-sliders {
   padding: 5px;

@@ -1,67 +1,69 @@
-(function(root) {
-  'use strict';
-  root.AudioActions = {
-    changeWaveform: function (waveType) {
-      AppDispatcher.dispatch({
-        actionType: AudioConstants.CHANGE_WAVEFORM,
-        payload: waveType
-      });
-    },
 
-    changeAMWaveform: function (waveType) {
-      AppDispatcher.dispatch({
-        actionType: AudioConstants.CHANGE_AM_WAVEFORM,
-        payload: waveType
-      });
-    },
+'use strict';
+var AppDispatcher = require ('../dispatcher/dispatcher');
+var AudioConstants = require('../constants/audio_constants');
 
-    changeAMFrequency: function (frequency) {
-      AppDispatcher.dispatch({
-        actionType: AudioConstants.CHANGE_AM_FREQUENCY,
-        payload: frequency
-      });
-    },
+module.exports = {
+  changeWaveform: function (waveType) {
+    AppDispatcher.dispatch({
+      actionType: AudioConstants.CHANGE_WAVEFORM,
+      payload: waveType
+    });
+  },
 
-    changeGain: function (gain) {
-      AppDispatcher.dispatch({
-        actionType: AudioConstants.CHANGE_GAIN,
-        payload: gain
-      });
-    },
+  changeAMWaveform: function (waveType) {
+    AppDispatcher.dispatch({
+      actionType: AudioConstants.CHANGE_AM_WAVEFORM,
+      payload: waveType
+    });
+  },
 
-    changeSustain: function (sustain) {
-      AppDispatcher.dispatch({
-        actionType: AudioConstants.CHANGE_SUSTAIN,
-        payload: sustain
-      });
-    },
+  changeAMFrequency: function (frequency) {
+    AppDispatcher.dispatch({
+      actionType: AudioConstants.CHANGE_AM_FREQUENCY,
+      payload: frequency
+    });
+  },
 
-    changeAttack: function (attack) {
-      AppDispatcher.dispatch({
-        actionType: AudioConstants.CHANGE_ATTACK,
-        payload: attack
-      });
-    },
+  changeGain: function (gain) {
+    AppDispatcher.dispatch({
+      actionType: AudioConstants.CHANGE_GAIN,
+      payload: gain
+    });
+  },
 
-    changeDecay: function (decay) {
-      AppDispatcher.dispatch({
-        actionType: AudioConstants.CHANGE_DECAY,
-        payload: decay
-      });
-    },
+  changeSustain: function (sustain) {
+    AppDispatcher.dispatch({
+      actionType: AudioConstants.CHANGE_SUSTAIN,
+      payload: sustain
+    });
+  },
 
-    changeRelease: function (release) {
-      AppDispatcher.dispatch({
-        actionType: AudioConstants.CHANGE_RELEASE,
-        payload: release
-      });
-    },
+  changeAttack: function (attack) {
+    AppDispatcher.dispatch({
+      actionType: AudioConstants.CHANGE_ATTACK,
+      payload: attack
+    });
+  },
 
-    changeDetune: function (detune) {
-      AppDispatcher.dispatch({
-        actionType: AudioConstants.CHANGE_DETUNE,
-        payload: detune
-      });
-    }
+  changeDecay: function (decay) {
+    AppDispatcher.dispatch({
+      actionType: AudioConstants.CHANGE_DECAY,
+      payload: decay
+    });
+  },
+
+  changeRelease: function (release) {
+    AppDispatcher.dispatch({
+      actionType: AudioConstants.CHANGE_RELEASE,
+      payload: release
+    });
+  },
+
+  changeDetune: function (detune) {
+    AppDispatcher.dispatch({
+      actionType: AudioConstants.CHANGE_DETUNE,
+      payload: detune
+    });
   }
-}(this));
+}
