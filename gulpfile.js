@@ -11,7 +11,7 @@ var source = require('vinyl-source-stream'),
 
     sourceFile = './app/scripts/app.js',
 
-    destFolder = './dist/scripts',
+    destFolder = './distribution/scripts',
     destFileName = 'app.js';
 
 var browserSync = require('browser-sync');
@@ -24,7 +24,7 @@ gulp.task('moveCss',['clean'], function(){
   // the base option sets the relative root for the set of files,
   // preserving the folder structure
   gulp.src(['./app/styles/**/*.css'], { base: './app/styles/' })
-  .pipe(gulp.dest('dist/styles'));
+  .pipe(gulp.dest('distribution/styles'));
 });
 
 gulp.task('sass', function() {
@@ -34,7 +34,7 @@ gulp.task('sass', function() {
             loadPath: ['app/bower_components']
         })
         .pipe($.autoprefixer('last 1 version'))
-        .pipe(gulp.dest('dist/styles'))
+        .pipe(gulp.dest('distribution/styles'))
         .pipe($.size());
 });
 
@@ -70,7 +70,7 @@ gulp.task('buildScripts', function() {
     return browserify(sourceFile)
         .bundle()
         .pipe(source(destFileName))
-        .pipe(gulp.dest('dist/scripts'));
+        .pipe(gulp.dest('distribution/scripts'));
 });
 
 // Images
@@ -81,14 +81,14 @@ gulp.task('images', function() {
             progressive: true,
             interlaced: true
         })))
-        .pipe(gulp.dest('dist/images'))
+        .pipe(gulp.dest('distribution/images'))
         .pipe($.size());
 });
 
 // Clean
 gulp.task('clean', function(cb) {
     $.cache.clearAll();
-    cb(del.sync(['dist/styles', 'dist/scripts', 'dist/images']));
+    cb(del.sync(['distribution/styles', 'distribution/scripts', 'distribution/images']));
 });
 
 // Bundle
@@ -99,7 +99,7 @@ gulp.task('buildBundle', ['styles', 'buildScripts']);
 // Robots.txt and favicon.ico
 gulp.task('extras', function() {
     return gulp.src(['app/*.txt', 'app/*.ico'])
-        .pipe(gulp.dest('dist/'))
+        .pipe(gulp.dest('distribution/'))
         .pipe($.size());
 });
 
@@ -121,10 +121,10 @@ gulp.task('watch', ['bundle', 'images'], function() {
 
 // Build
 gulp.task('build', ['buildBundle', 'images', 'extras'], function() {
-    gulp.src('dist/scripts/app.js')
+    gulp.src('distribution/scripts/app.js')
         .pipe($.uglify())
         .pipe($.stripDebug())
-        .pipe(gulp.dest('dist/scripts'));
+        .pipe(gulp.dest('distribution/scripts'));
 });
 
 // Default task

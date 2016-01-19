@@ -5,7 +5,7 @@ var WaveformButton = require('./waveform_button');
 
 var WAVEFORM_NAMES = {  square: 'square',
                       sawtooth: 'sawtooth',
-                      triangle: 'triangle',
+                        triangle: 'triangle',
                           sine: 'sine'};
 
 var WaveformSelector = React.createClass({
