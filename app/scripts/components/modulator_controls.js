@@ -9,18 +9,18 @@ var WaveformSelector = require('./waveform_selector');
 var ModulatorControls = React.createClass({
   render: function () {
     return (
-      <div id="modulator-controls">
+      <div className='waveform-controls'>
         <WaveformSelector waveform={this.props.waveform}
                           changeWaveform={AudioActions.changeAMWaveform}
                           />
-        <HorizontalSlider name="frequency"
+        <HorizontalSlider name='frequency'
                           value={this.props.frequency}
                           maxValue={AudioConstants.MAX_AM_FREQUENCY}
                           minValue={AudioConstants.MIN_AM_FREQUENCY}
                           changeCallback={AudioActions.changeAMFrequency}
                           isOffset={false}
                           />
-        <div id="modulator-control-label">modulator</div>
+        <div className='waveform-control-label'>modulator</div>
       </div>
     );
   }

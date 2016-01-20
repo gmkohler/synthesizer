@@ -42,6 +42,7 @@ var VerticalSliderIndex = React.createClass({
                         handleKeyDown={this._handleKeyDown}
                         isOffset={false}
                         />
+       <div className='label'>envelope</div>
       </div>
     );
   }

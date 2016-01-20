@@ -66,6 +66,7 @@ var Recorder = React.createClass({
           </div>
         </div>
         <RecordingIndex recordings={this.state.recordings}/>
+        <div className='label'>recordings</div>
       </div>
     );
   }

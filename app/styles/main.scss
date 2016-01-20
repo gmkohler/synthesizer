@@ -5,8 +5,8 @@ body {
   font-size: 20px;
 }
 
-#main {
-  width:95%;
+#app {
+  width:85%;
   margin:auto;
 }
 
@@ -15,6 +15,8 @@ body {
 }
 
 .keyboard {
+  margin:auto;
+  width:fit-content;
   height: 224px;
 }
 
@@ -52,8 +54,6 @@ body {
   float:right;
 }
 
-
-
 .black {
   position: relative;
   /*left: -10%;*/
@@ -73,121 +73,136 @@ body {
 
 .controls {
   height: 250px;
-  width:100%;
+  width:75%;
   border: 1px solid black;
   padding:5px;
+
+  .controls-left,
+  .controls-center,
+  .controls-right {
+      float:left;
+      height:98%;
+
+  }
+  .controls-left,
+  .controls-center {
+    margin-right:10px;
+  }
 }
 
-.controls>div {
-  margin-right:20px;
-  padding:0.1%;
-  float:left;
-  height:98%;
+
+.button-wrapper {
+  width:fit-content;
+  margin: 0px auto;
 }
 
 .controls-left {
-  width:21%;
+  width:32%;
 }
-
 .controls-center {
-
+  width:32%;
 }
 .controls-right {
-  width:25%;
+  width:32%;
 }
 
-#modulator-controls {
+.waveform-controls {
   position:relative;
+  margin-bottom:6px;
+  &:last-child {
+    margin-bottom:0;
+  }
+  .waveform-selector,
+  .horizontal-slider {
+    width:100%;
+    margin-bottom:4px;
+  }
+  .waveform-control-label {
+    margin: 0;
+    width: fit-content;
+    background-color: white;
+    font-size: 12px;
+    position: absolute;
+    right:10px;
+    bottom:-6px;
+  }
 }
 
-#modulator-control-label {
-  margin: 0;
-  width: fit-content;
-  background-color: white;
-  font-size: 12px;
-  position: absolute;
-  right:10px;
-  bottom:-10px;
-}
-#modulator-controls>div {
-  margin-bottom:4px;
-}
-
-.controls>div>div {
+.waveform-controls,
+#vertical-sliders,
+.recorder {
   float:left;
   clear:both;
-
-  width:100%;
+  width:96%;
+  position:relative;
   border: 1px solid black;
   border-radius: 5px;
-  padding:3px;
-}
-
-.controls>div>div.waveform-selector {
-  width:fit-content;
-}
-
-.controls-left>div {
-  margin: 2px 0;
-}
-.controls-left>div:first-child{
-  /*margin-top:4px;*/
+  padding: 2%;
+  .label {
+    margin: 0;
+    width: fit-content;
+    background-color: white;
+    font-size: 12px;
+    position: absolute;
+    right:10px;
+    bottom:-6px;
+  }
 }
 
 .waveform-selector {
   width:fit-content;
-}
+  .button-wrapper{
+    width:fit-content;
+    margin:auto;
+    .waveform-button {
+      background-size: cover;
+      background-position: center;
+      border: 1px solid;
+      border-style: outset;
+      height:30px;
+      width:50px;
+      margin-left:3px;
+      float:left;
+      cursor:pointer;
 
-.button-wrapper{
-  width:fit-content;
-  margin:auto;
-}
-.waveform-button {
-  background-size: cover;
-  background-position: center;
-  border: 1px solid;
-  border-style: outset;
-  height:30px;
-  width:50px;
-  margin-left:3px;
-  float:left;
-  cursor:pointer;
+      &:first-child {
+        margin: 0;
+      }
 
-  &:first-child {
-    margin: 0;
-  }
+      &.active {
+        background-color: $ILLUMINATED_BUTTON_COLOR;
+      }
 
-  &.active {
-    background-color: $ILLUMINATED_BUTTON_COLOR;
-  }
+      &#sine{
+        background-image:url('../images/sine_wave.png');
+      }
 
-  &#sine{
-    background-image:url('../images/sine_wave.png');
-  }
+      &#square{
+        background-image:url('../images/square_wave.png')
+      }
 
-  &#square{
-    background-image:url('../images/square_wave.png')
-  }
+      &#sawtooth{
+        background-image:url('../images/sawtooth_wave.png')
+      }
 
-  &#sawtooth{
-    background-image:url('../images/sawtooth_wave.png')
-  }
-
-  &#triangle{
-    background-image:url('../images/triangle_wave.png')
+      &#triangle{
+        background-image:url('../images/triangle_wave.png')
+      }
+    }
   }
 }
 
 
 #vertical-sliders {
-  padding: 5px;
+  height:94%;
+  padding: 2% 5px 4% 5px;
 }
 
 .vertical-slider {
   float:left;
   margin: 0 8px;
   position:relative;
-  height:150px;
+  height:100%;
   width:20px;
 }
 
@@ -371,7 +386,7 @@ div.record-button {
 }
 
 .recorder {
-  height:100%;
+  height:96%;
 
   .recording-index {
     height:88%;

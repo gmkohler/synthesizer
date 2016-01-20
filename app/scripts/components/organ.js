@@ -6,7 +6,8 @@ var React = window.React = require('react');
 var AudioActions = require('../actions/audio_actions');
 var AudioConstants = require('../constants/audio_constants');
 var AudioStore = require('../stores/audio_store');
-var HorizontalSliderIndex = require('./horizontal_slider_index');
+var DetuneSlider = require('./detune_slider');
+// var HorizontalSliderIndex = require('./horizontal_slider_index');
 var Key = require('../components/key');
 var KeyActions = require('../actions/key_actions');
 var KeyStore = require('../stores/key_store');
@@ -123,30 +124,33 @@ var Organ = React.createClass({
     //
     //
     return (
-      <div className="keytar">
-        <div className="controls cf">
-          <div className="controls-left">
+      <div className='keytar'>
+        <div className='controls cf'>
+          <div className='controls-left'>
             <VerticalSliderIndex gain={this.state.gain}
                                  sustain={this.state.sustain}
                                  attack={this.state.attack}
                                  decay={this.state.decay}
                                  release={this.state.release}/>
-
+            
           </div>
-          <div className="controls-center">
+          <div className='controls-center'>
             <ModulatorControls waveform={this.state.AMWaveform}
                                frequency={this.state.AMFrequency}
                                />
-            <HorizontalSliderIndex detune={this.state.detune}/>
-            <WaveformSelector waveform={this.state.waveform}
-                              changeWaveform={AudioActions.changeWaveform}
-                              />
+            <div className='waveform-controls'>
+              <WaveformSelector waveform={this.state.waveform}
+                                changeWaveform={AudioActions.changeWaveform}
+                                />
+              <DetuneSlider detune={this.state.detune}/>
+              <div className='waveform-control-label'>carrier</div>
+            </div>
           </div>
-          <div className="controls-right">
+          <div className='controls-right'>
             <Recorder />
           </div>
         </div>
-        <div className={"keyboard"}>{keys}</div>
+        <div className='keyboard'>{keys}</div>
       </div>
     );
   }
