@@ -41,13 +41,7 @@ var RecordingStore = xtend(EventEmitter.prototype, {
 var _recordings = [
     {id: 1, name: 'hi'},
     {id: 2, name: 'hello'},
-    {id: 3, name: 'howdy'},
-    {id: 4, name: 'yet again'},
-    {id: 5, name: 'this is goodbye'},
-    {id: 6, name: 'or is it'},
-    {id: 7, name: 'we may never know'},
-    {id: 8, name: 'just a couple more'},
-    {id: 9, name: 'is this name too long? let\'s see'},
+    {id: 3, name: 'howdy'}
 ];
 
 var nextID = _recordings.length;
@@ -60,6 +54,9 @@ function findRecordingIndex (recordingID) {
 
 function addRecording (recording) {
   recording.id = nextID;
+  if (!recording.name) {
+    recording.name = 'recording ' + (recording.id + 1).toString();
+  }
   nextID += 1;
   _recordings.push(recording);
   RecordingStore._hasChanged();

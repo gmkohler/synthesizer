@@ -1,7 +1,8 @@
-/*global KeyActions*/
-
 'use strict';
+var KeyActions = require('../actions/key_actions');
+
 var Track = function(options) {
+  options = options || {};
   this.name = options.name || '';
   this.roll = options.roll || [];
 };
@@ -39,4 +40,5 @@ Track.prototype.play = function () {
     }
   }.bind(this),100 );
 };
+
 module.exports = Track;

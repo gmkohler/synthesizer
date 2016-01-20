@@ -2,14 +2,16 @@
 var React = require('react');
 
 // var KeyStore = require('../stores/key_store');
+var RecordingActions = require('../actions/recording_actions');
 var RecordingIndex = require('./recording_index');
 var RecordingStore = require('../stores/recording_store');
-// var Track = require('../util/track');
+var Track = require('../util/track');
 
 var Recorder = React.createClass({
   getInitialState: function() {
     return({ isRecording: false,
               isPlaying: false,
+              track: new Track(),
               recordings: []
             });
   },
@@ -32,8 +34,9 @@ var Recorder = React.createClass({
   },
 
   toggleRecord: function() {
-    // if (this.state.isRecording) {
-    //   this.state.track.stopRecording();
+    if (this.state.isRecording) {
+      this.saveRecording();
+    }
     // } else {
     //   this.state.track.startRecording();
     // }
@@ -46,6 +49,11 @@ var Recorder = React.createClass({
 
   playRecording: function () {
     this.state.track.play();
+  },
+
+  saveRecording: function () {
+    RecordingActions.addRecording(this.state.track);
+    this.setState({track: new Track()});
   },
 
   render: function () {
