@@ -19,7 +19,7 @@ var Recording = React.createClass({
       <div className='recording'
            onClick={this._handleClick}>
         <div className='recording-label-wrapper'>
-          <span className='recording-label'>{this.props.name}</span>
+          {this.props.name}
         </div>
       </div>
     );

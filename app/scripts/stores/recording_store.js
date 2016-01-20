@@ -41,7 +41,13 @@ var RecordingStore = xtend(EventEmitter.prototype, {
 var _recordings = [
     {id: 1, name: 'hi'},
     {id: 2, name: 'hello'},
-    {id: 3, name: 'howdy'}
+    {id: 3, name: 'howdy'},
+    {id: 4, name: 'yet again'},
+    {id: 5, name: 'this is goodbye'},
+    {id: 6, name: 'or is it'},
+    {id: 7, name: 'we may never know'},
+    {id: 8, name: 'just a couple more'},
+    {id: 9, name: 'is this name too long? let\'s see'},
 ];
 
 var nextID = _recordings.length;

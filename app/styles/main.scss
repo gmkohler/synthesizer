@@ -288,6 +288,7 @@ div#recorder-buttons {
   // border: 1px solid black;
   background-color: #999792;
   width:96%;
+  height:10%;
   padding: 1% 2%;
   border-radius:2%;
 }
@@ -368,25 +369,42 @@ div.record-button {
   }
 }
 
-.recording-index {
-  .recording-index-label {
+.recorder {
+  height:100%;
 
-  }
-  .recording-index-items {
-    border: 1px solid black;
-    width:96%;
-    margin: 0 2%;
-    .recording {
-      padding: 3.5px 0;
-      background-color: gray;
-      height: 28px;
-      .recording-label-wrapper {
-        background-color: white;
-        height: 100%;
-        width: 96%;
-        margin: auto;
-        .recording-label {
+  .recording-index {
+    height:88%;
+    .recording-index-label {
+      height:12%;
+    }
+    .recording-index-items {
+      border: 1px solid black;
+      width:96%;
+      margin: 0 2%;
+      height:85%;
+      overflow-y:scroll;
+      margin: 0 2%;
+      .recording {
+        padding: 3.5px 0;
+        background-color: gray;
+        height: 28px;
+        .recording-label-wrapper {
+          background-color: white;
+          height: 100%;
+          width: 92%;
+          margin: 0 2%;
+          padding: 0 2%;
           line-height: 27px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space:nowrap;
+          display: inline-block;
+          .recording-label {
+            overflow:hidden;
+            display:inline-block;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+          }
         }
       }
     }

@@ -24,7 +24,7 @@ var RecordingIndex = React.createClass({
         <div className='recording-index-label'>
           Recordings
         </div>
-        <div className='recording-index'>
+        <div className='recording-index-items'>
           {recordings}
         </div>
       </div>
