@@ -8,7 +8,7 @@ var Note = require('../util/note');
 
 var Key = React.createClass({
   componentDidMount: function() {
-    this.note = new Note(TONES[this.props.noteName]);
+    this.note = new Note(this.props.ctx, TONES[this.props.noteName]);
   },
 
   componentWillReceiveProps: function(newProps) {

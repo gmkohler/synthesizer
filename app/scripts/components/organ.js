@@ -37,7 +37,13 @@ var Organ = React.createClass({
             };
   },
 
-  componentDidMount: function() {
+  componentWillMount: function () {
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
+    this.ctx = new AudioContext();
+  },
+
+  componentDidMount: function () {
+
     document.addEventListener('keydown', this._handleKeyDown);
     document.addEventListener('keyup', this._handleKeyUp);
 
@@ -102,7 +108,8 @@ var Organ = React.createClass({
     var that = this;
     var keys = (Object.keys(TONES).map(function (noteName){
       var active = that.state.pressedKeys[noteName];
-      return (<Key key={noteName}
+      return (<Key ctx={that.ctx}
+                   key={noteName}
                    handleMouseEnter={that._handleMouseEnter}
                    handleMouseLeave={that._handleMouseLeave}
                    handleMouseDown={that._handleMouseDown}
@@ -132,7 +139,7 @@ var Organ = React.createClass({
                                  attack={this.state.attack}
                                  decay={this.state.decay}
                                  release={this.state.release}/>
-            
+
           </div>
           <div className='controls-center'>
             <ModulatorControls waveform={this.state.AMWaveform}

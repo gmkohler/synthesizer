@@ -1,11 +1,7 @@
 'use strict';
-/* global window */
 var AudioConstants = require('../constants/audio_constants');
 
-var AudioContext = window.AudioContext || window.webkitAudioContext;
-var ctx = new AudioContext();
-
-var Note = function(frequency) {
+var Note = function(ctx, frequency) {
   this.ctx = ctx;
 
   this.waveType = AudioConstants.INITIAL_WAVEFORM;
