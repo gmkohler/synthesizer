@@ -20,7 +20,7 @@ var ModulatorControls = React.createClass({
                           changeCallback={AudioActions.changeAMFrequency}
                           isOffset={false}
                           />
-        <div className='waveform-control-label'>modulator</div>
+        <div className='waveform-control-label'>amp. modulator</div>
       </div>
     );
   }
