@@ -1,8 +1,8 @@
 'use strict';
 var AudioConstants = require('../constants/audio_constants');
 
-var Note = function(ctx, frequency) {
-  this.ctx = ctx;
+var Note = function(context, frequency) {
+  this.ctx = context;
 
   this.waveType = AudioConstants.INITIAL_WAVEFORM;
   this.carrierFreq = frequency;
@@ -20,13 +20,15 @@ var Note = function(ctx, frequency) {
   var that = this;
 
   this.gainNode = (function () {
+    var ctx = that.ctx;
     var gainNode = ctx.createGain();
     gainNode.connect(ctx.destination);
     return gainNode;
   })();
 
   this.oscillatorNode = function (freq, gainNode) {
-    var osc = ctx.createOscillator();
+    var ctx = that.ctx,
+        osc = ctx.createOscillator();
     osc.type = that.waveType;
     osc.frequency.setValueAtTime(freq, ctx.currentTime);
     osc.detune.setValueAtTime(that.detuneValue, ctx.currentTime);
@@ -35,7 +37,8 @@ var Note = function(ctx, frequency) {
   };
 
   this.modNode = function (freq, gainNode) {
-    var am = ctx.createOscillator();
+    var ctx = that.ctx,
+        am = ctx.createOscillator();
     am.type = that.modType;
     am.frequency.setValueAtTime(freq, ctx.currentTime);
     am.connect(gainNode.gain);
@@ -54,7 +57,8 @@ Note.prototype.setModType = function (waveType) {
 
 Note.prototype.setModFrequency = function (frequency) {
   this.modFreq = frequency;
-  if (this.am) {this.am.frequency.setValueAtTime(frequency, ctx.currentTime);}
+  if (this.am) {this.am.frequency
+                       .setValueAtTime(frequency, this.ctx.currentTime);}
 };
 
 Note.prototype.setGain = function (gain) {
@@ -65,13 +69,10 @@ Note.prototype.setSustain = function (sustain) {
   this.sustain = sustain;
 };
 
-Note.prototype.setLFOFreq = function (freq) {
-  this.lfoNode.frequency.value = freq;
-};
-
 Note.prototype.setDetune = function (detune) {
   this.detuneValue = detune;
-  if (this.osc) {this.osc.detune.setValueAtTime(detune, ctx.currentTime);}
+  if (this.osc) {this.osc.detune
+                         .setValueAtTime(detune, this.ctx.currentTime);}
 };
 
 Note.prototype.setAttack = function (duration) {
