@@ -45,6 +45,12 @@ body {
   clear: both;
   content: "";
 }
+.left {
+  float:left;
+}
+.right {
+  float:right;
+}
 
 
 
@@ -85,6 +91,9 @@ body {
 
 .controls-center {
 
+}
+.controls-right {
+  width:25%;
 }
 
 #modulator-controls {
@@ -128,7 +137,8 @@ body {
 .waveform-selector {
   width:fit-content;
 }
-.waveform-button-wrapper{
+
+.button-wrapper{
   width:fit-content;
   margin:auto;
 }
@@ -275,15 +285,20 @@ body {
 }
 
 div#recorder-buttons {
-  border: 1px solid black;
-  width:150px;
+  // border: 1px solid black;
+  background-color: #999792;
+  width:96%;
+  padding: 1% 2%;
+  border-radius:2%;
 }
 
 div.record-button {
   width: 40px;
-  height: 20px;
+  height: 25px;
+  background-color: #F1F7F0;
   border: 1px solid black;
   margin: auto;
+  margin-right:2px;
   float:left;
   cursor: pointer;
 
@@ -294,10 +309,10 @@ div.record-button {
       position:relative;
       background:red;
       border-radius:100%;
-      width:12px;
-      height:12px;
-      bottom:2px;
-      left:14px;
+      width:15px;
+      height:15px;
+      bottom:-2px;
+      left:12.5px;
       cursor: pointer;
     }
   }
@@ -308,10 +323,10 @@ div.record-button {
       display:inline-block;
       position:relative;
       background:red;
-      width:12px;
-      height:12px;
-      bottom:2px;
-      left:14px;
+      width: 15px;
+      height: 15px;
+      bottom: -1.5px;
+      left: 12.5px;
       cursor: pointer;
     }
   }
@@ -321,10 +336,10 @@ div.record-button {
       content: '';
       display: inline-block;
       position: relative;
-      bottom: 2.5px;
-      left: 15px;
+      bottom: -1px;
+      left: 13.5px;
       border-style: solid;
-      border-width: 6px 0 6px 12px;
+      border-width: 7.5px 0 7.5px 15px;
       border-color: transparent transparent transparent black;
     }
   }
@@ -332,23 +347,48 @@ div.record-button {
   &.pause {
     &:before {
       content: "";
-      display:inline-block;
-      position: relative;
-      width: 4px;
-      height: 12px;
       background: black;
-      bottom: 2.5px;
-      left: 15px;
+      display:inline-block;
+      width: 5px;
+      height: 15px;
+      position: relative;
+      bottom: -1.5px;
+      left: 13px;
     }
     &:after {
       content: "";
-      display:inline-block;
-      position: relative;
-      width: 4px;
-      height: 12px;
       background: black;
-      bottom: 2.5px;
-      left: 17px;
+      display:inline-block;
+      width: 5px;
+      height: 15px;
+      position: relative;
+      bottom: -1.5px;
+      left: 16px;
+    }
+  }
+}
+
+.recording-index {
+  .recording-index-label {
+
+  }
+  .recording-index-items {
+    border: 1px solid black;
+    width:96%;
+    margin: 0 2%;
+    .recording {
+      padding: 3.5px 0;
+      background-color: gray;
+      height: 28px;
+      .recording-label-wrapper {
+        background-color: white;
+        height: 100%;
+        width: 96%;
+        margin: auto;
+        .recording-label {
+          line-height: 27px;
+        }
+      }
     }
   }
 }

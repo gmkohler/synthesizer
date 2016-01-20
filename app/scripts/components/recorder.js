@@ -1,22 +1,34 @@
 'use strict';
 var React = require('react');
 
-var KeyStore = require('../stores/key_store');
+// var KeyStore = require('../stores/key_store');
 var RecordingIndex = require('./recording_index');
-var Track = require('../util/track');
+var RecordingStore = require('../stores/recording_store');
+// var Track = require('../util/track');
 
 var Recorder = React.createClass({
   getInitialState: function() {
-    return( { isRecording: false,
+    return({ isRecording: false,
               isPlaying: false,
-              track: (new Track({name: 'Gizmo'}))});
+              recordings: []
+            });
   },
 
   componentDidMount: function () {
-    KeyStore.addChangeListener(function() {
-      var currentNotes = KeyStore.all();
-      this.setState({track: this.state.track.addNotes(currentNotes)});
-    }.bind(this));
+    RecordingStore.addChangeListener(this._setRecordings);
+    this._setRecordings();
+    // KeyStore.addChangeListener(function() {
+    //   var currentNotes = KeyStore.all();
+    //   this.setState({track: this.state.track.addNotes(currentNotes)});
+    // }.bind(this));
+  },
+
+  componentWillUnmount: function () {
+    RecordingStore.removeChangeListener(this._setRecordings);
+  },
+
+  _setRecordings: function () {
+    this.setState({recordings: RecordingStore.all()});
   },
 
   toggleRecord: function() {
@@ -44,14 +56,16 @@ var Recorder = React.createClass({
         (this.state.isPlaying ? 'pause' : 'play');
     // var playButtonText = 'PLAY';
     return(
-      <div>
-        <div id='recorder-buttons'>
-          <div className={recordButtonClassName}
-               onClick={this.toggleRecord}></div>
-          <div className={playButtonClassName}
-               onClick={this.togglePlay}></div>
+      <div className='recorder'>
+        <div id='recorder-buttons' className='cf'>
+          <div className='button-wrapper cf'>
+            <div className={recordButtonClassName}
+                 onClick={this.toggleRecord}></div>
+            <div className={playButtonClassName}
+                 onClick={this.togglePlay}></div>
+          </div>
         </div>
-        <RecordingIndex />
+        <RecordingIndex recordings={this.state.recordings}/>
       </div>
     );
   }

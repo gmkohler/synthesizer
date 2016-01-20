@@ -1,7 +1,6 @@
-(function(root) {
-  'use strict';
-  root.RecordingConstants = {
-    ADD_RECORDING: "ADD_RECORDING",
-    RECORDING_CHANGE_EVENT: "RECORDING_CHANGE_EVENT"
-  };
-}(this));
+'use strict';
+module.exports = {
+  ADD_RECORDING: 'ADD_RECORDING',
+  DELETE_RECORDING: 'DELETE_RECORDING',
+  RECORDING_CHANGE_EVENT: 'RECORDING_CHANGE_EVENT'
+};

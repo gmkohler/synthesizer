@@ -37,23 +37,29 @@ var Organ = React.createClass({
   },
 
   componentDidMount: function() {
-    KeyStore.addChangeListener(function () {
-      this.setState({pressedKeys: KeyStore.all()});
-    }.bind(this));
-
-    AudioStore.addChangeListener(function () {
-      this.setState(AudioStore.getConfigs());
-    }.bind(this));
-
-    this.setState(AudioStore.getConfigs());
-
     document.addEventListener('keydown', this._handleKeyDown);
     document.addEventListener('keyup', this._handleKeyUp);
+
+    KeyStore.addChangeListener(this._setPressedKeys);
+    AudioStore.addChangeListener(this._setConfigs);
+
+    this._setConfigs();
   },
 
   componentWillUnmount: function () {
     document.removeEventListener('keydown', this._handleKeyDown);
     document.removeEventListener('keyup', this._handleKeyUp);
+
+    KeyStore.removeChangeListener(this._setPressedKeys);
+    AudioStore.removeChangeListener(this._setConfigs);
+  },
+
+  _setPressedKeys: function () {
+    this.setState({pressedKeys: KeyStore.all()});
+  },
+
+  _setConfigs: function () {
+    this.setState(AudioStore.getConfigs());
   },
 
   _handleKeyDown: function (e) {
@@ -142,35 +148,6 @@ var Organ = React.createClass({
         <div className={"keyboard"}>{keys}</div>
       </div>
     );
-    // return (
-    //   <div>
-    //     <div className="keytar">
-    //       <div className="controls cf">
-    //         <div className="controls-left">
-    //           <VerticalSliderIndex gain={this.state.gain}
-    //                                sustain={this.state.sustain}
-    //                                attack={this.state.attack}
-    //                                decay={this.state.decay}
-    //                                release={this.state.release}/>
-    //           <HorizontalSliderIndex detune={this.state.detune}/>
-    //           <WaveformSelector waveform={this.state.waveform}
-    //                             changeWaveform={AudioActions.changeWaveform}
-    //                             />
-    //         </div>
-    //         <div className="controls-center">
-    //           <ModulatorControls waveform={this.state.AMWaveform}
-    //                              frequency={this.state.AMFrequency}
-    //                              />
-    //         </div>
-    //         <div className="controls-right">
-    //           <Recorder />
-    //         </div>
-    //       </div>
-    //       <div className={"keyboard"}>{keys}</div>
-    //     </div>
-    //     <div className="recordings"/>
-    //   </div>
-    // );
   }
 });
 

@@ -24,7 +24,7 @@ var WaveformSelector = React.createClass({
     }.bind(this));
 
     return (<div className="waveform-selector cf">
-              <div className="waveform-button-wrapper cf">
+              <div className="button-wrapper cf">
                 {buttons}
               </div>
             </div>);
