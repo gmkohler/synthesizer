@@ -131,15 +131,16 @@ var Organ = React.createClass({
                                  attack={this.state.attack}
                                  decay={this.state.decay}
                                  release={this.state.release}/>
-             <HorizontalSliderIndex detune={this.state.detune}/>
-             <WaveformSelector waveform={this.state.waveform}
-                               changeWaveform={AudioActions.changeWaveform}
-                               />
+
           </div>
           <div className="controls-center">
-          <ModulatorControls waveform={this.state.AMWaveform}
-                             frequency={this.state.AMFrequency}
-                             />
+            <ModulatorControls waveform={this.state.AMWaveform}
+                               frequency={this.state.AMFrequency}
+                               />
+            <HorizontalSliderIndex detune={this.state.detune}/>
+            <WaveformSelector waveform={this.state.waveform}
+                              changeWaveform={AudioActions.changeWaveform}
+                              />
           </div>
           <div className="controls-right">
             <Recorder />
