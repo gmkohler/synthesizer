@@ -27,11 +27,12 @@ Track.prototype.stopRecording = function() {
 };
 
 Track.prototype.play = function () {
-  if (this.interval) { return;}
+  if (this.intervalID) { return;}
+  this.interval = 1;
   var playbackStartTime = this.ctx.currentTime;
   var currentNote = 0;
 
-  this.interval = setInterval(function () {
+  this.intervalID = setInterval(function () {
     if (currentNote < this.roll.length) {
       if ((this.ctx.currentTime - playbackStartTime) > this.roll[currentNote].timeSlice) {
         // var currentNotes = this.roll[currentNote].notes;
@@ -39,10 +40,10 @@ Track.prototype.play = function () {
         KeyActions.resetKeys(this.roll[currentNote].notes);
       }
     } else {
-      clearInterval(this.interval);
-      this.interval = null;
+      clearInterval(this.intervalID);
+      this.intervalID = null;
     }
-  }.bind(this),100 );
+  }.bind(this), this.interval);
 };
 
 module.exports = Track;
