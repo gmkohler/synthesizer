@@ -1,6 +1,6 @@
 'use strict';
 var React = require('react');
-var RecordingActions = require('../actions/recording_actions');
+// var RecordingActions = require('../actions/recording_actions');
 
 var Recording = React.createClass({
   displayName: 'Recording',
@@ -11,7 +11,8 @@ var Recording = React.createClass({
   },
 
   _handleClick: function () {
-    RecordingActions.deleteRecording(this.props.recordingID);
+    this.props.track.playRecording();
+    // RecordingActions.deleteRecording(this.props.recordingID);
   },
 
   render: function () {

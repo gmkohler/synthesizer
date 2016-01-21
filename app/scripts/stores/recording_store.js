@@ -53,6 +53,7 @@ function findRecordingIndex (recordingID) {
 }
 
 function addRecording (recording) {
+  debugger;
   recording.id = nextID;
   if (!recording.name) {
     recording.name = 'recording ' + (recording.id + 1).toString();

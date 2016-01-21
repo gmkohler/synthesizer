@@ -154,7 +154,7 @@ var Organ = React.createClass({
             </div>
           </div>
           <div className='controls-right'>
-            <Recorder />
+            <Recorder ctx={this.ctx}/>
           </div>
         </div>
         <div className='keyboard'>{keys}</div>

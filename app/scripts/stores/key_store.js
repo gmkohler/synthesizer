@@ -15,7 +15,7 @@ var KeyStore = xtend(EventEmitter.prototype, {
     this.on(KeyConstants.KEY_CHANGE_EVENT, handler);
   },
 
-  removeChangeHandler: function (handler) {
+  removeChangeListener: function (handler) {
     this.removeListener(KeyConstants.KEY_CHANGE_EVENT, handler);
   },
 

@@ -1,7 +1,7 @@
 'use strict';
 var React = require('react');
 
-// var KeyStore = require('../stores/key_store');
+var KeyStore = require('../stores/key_store');
 var RecordingActions = require('../actions/recording_actions');
 var RecordingIndex = require('./recording_index');
 var RecordingStore = require('../stores/recording_store');
@@ -11,7 +11,7 @@ var Recorder = React.createClass({
   getInitialState: function() {
     return({ isRecording: false,
               isPlaying: false,
-              track: new Track(),
+              track: new Track(this.props.ctx),
               recordings: []
             });
   },
@@ -19,10 +19,6 @@ var Recorder = React.createClass({
   componentDidMount: function () {
     RecordingStore.addChangeListener(this._setRecordings);
     this._setRecordings();
-    // KeyStore.addChangeListener(function() {
-    //   var currentNotes = KeyStore.all();
-    //   this.setState({track: this.state.track.addNotes(currentNotes)});
-    // }.bind(this));
   },
 
   componentWillUnmount: function () {
@@ -36,10 +32,9 @@ var Recorder = React.createClass({
   toggleRecord: function() {
     if (this.state.isRecording) {
       this.saveRecording();
+    } else {
+      this.startRecording();
     }
-    // } else {
-    //   this.state.track.startRecording();
-    // }
     this.setState({isRecording: !this.state.isRecording});
   },
 
@@ -51,9 +46,21 @@ var Recorder = React.createClass({
     this.state.track.play();
   },
 
+  startRecording: function () {
+    KeyStore.addChangeListener(this.updateTrack);
+    this.state.track.startRecording();
+  },
+
+  updateTrack: function () {
+    var currentNotes = KeyStore.all();
+    this.setState({track: this.state.track.addNotes(currentNotes)});
+  },
+
   saveRecording: function () {
+    KeyStore.removeChangeListener(this.updateTrack);
+    this.state.track.stopRecording();
     RecordingActions.addRecording(this.state.track);
-    this.setState({track: new Track()});
+    this.setState({track: new Track(this.props.ctx)});
   },
 
   render: function () {
