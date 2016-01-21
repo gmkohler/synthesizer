@@ -52,10 +52,10 @@ function removeKey (key) {
   KeyStore.changed();
 }
 
-function resetKeys (keys) {
+function resetKeys (noteNames) {
   _keys = {};
-  keys.forEach(function (key) {
-    _keys[key] = true;
+  Object.keys(noteNames).forEach(function (noteName) {
+    _keys[noteName] = true;
   });
 
   KeyStore.changed();

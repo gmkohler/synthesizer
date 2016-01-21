@@ -6,21 +6,21 @@ var Recording = React.createClass({
   displayName: 'Recording',
 
   propTypes: {
-    recordingID: React.PropTypes.number,
-    name: React.PropTypes.string
+    recording: React.PropTypes.object,
   },
 
   _handleClick: function () {
-    this.props.track.playRecording();
+    this.props.recording.play();
     // RecordingActions.deleteRecording(this.props.recordingID);
   },
 
   render: function () {
+    var recording = this.props.recording;
     return (
       <div className='recording'
            onClick={this._handleClick}>
         <div className='recording-label-wrapper'>
-          {this.props.name}
+          {recording.name}
         </div>
       </div>
     );
