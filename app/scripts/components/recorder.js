@@ -65,18 +65,35 @@ var Recorder = React.createClass({
 
   render: function () {
 
-    var recordButtonClassName = 'record-button ' +
-        (this.state.isRecording ? 'stop' : 'record');
-    var playButtonClassName = 'record-button ' +
-        (this.state.isPlaying ? 'pause' : 'play');
-    // var playButtonText = 'PLAY';
+    var recordButtonClassName = 'record-button',
+        recordButtonStyle;
+    if (this.state.isRecording) {
+      recordButtonClassName += ' stop';
+      recordButtonStyle = {borderStyle: 'inset'};
+    } else {
+      recordButtonClassName += ' record';
+      recordButtonStyle = {borderStyle: 'outset'};
+    }
+
+    var playButtonClassName = 'record-button',
+        playButtonStyle;
+    if (this.state.isPlaying) {
+      playButtonClassName += ' pause';
+      playButtonStyle = {borderStyle: 'inset'};
+    } else {
+      playButtonClassName += ' play';
+      playButtonStyle = {borderStyle: 'outset'};
+    }
+
     return(
       <div className='recorder'>
         <div id='recorder-buttons' className='cf'>
           <div className='button-wrapper cf'>
             <div className={recordButtonClassName}
+                 style={recordButtonStyle}
                  onClick={this.toggleRecord}></div>
             <div className={playButtonClassName}
+                 style={playButtonStyle}
                  onClick={this.togglePlay}></div>
           </div>
         </div>

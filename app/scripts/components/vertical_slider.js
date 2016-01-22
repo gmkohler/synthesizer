@@ -102,8 +102,11 @@ var VerticalSlider = React.createClass({
 
   render: function () {
     var topOffset = this._pxFromValue(this.props.value) || 1,
-        cursorType = this.state.isDragging ? '-webkit-grabbing' : '-webkit-grab',
-        verticalSliderTrackStyle = {cursor: cursorType},
+        webkitCursorType =
+          this.state.isDragging ? '-webkit-grabbing' : '-webkit-grab',
+        cursorType = this.state.isDragging ? 'grabbing' : 'grab',
+        verticalSliderTrackStyle = {cursor: cursorType,
+                                    cursor: webkitCursorType},
         verticalSliderThumbStyle = {top: topOffset},
         verticalSliderRangeStyle = {height: topOffset};
 

@@ -12,13 +12,17 @@ var Key = React.createClass({
   },
 
   componentWillReceiveProps: function(newProps) {
-    // need to figure out if isActive is always a newProp
     if (newProps.isActive && !this.props.isActive) {
       this.note.start();
     } else if (!newProps.isActive && this.props.isActive) {
       this.note.stop();
     }
-    // can I do this via metaprogramming?
+    // Don't want to change can I do this via metaprogramming?
+    // Object.keys.newProps.forEach((key) => {
+    //   if (newProps[key] !== this.props[key]) {
+    //
+    //    }
+    // });
     if (newProps.waveform !== this.props.waveform) {
       this.note.setType(newProps.waveform);
     }

@@ -20,7 +20,9 @@ var Recording = React.createClass({
       <div className='recording'
            onClick={this._handleClick}>
         <div className='recording-label-wrapper'>
-          {recording.name}
+          <span className='recording-label left'>{recording.name}</span>
+          <i className='right glyphicon glyphicon-remove'/>
+          <i className='right glyphicon glyphicon-pencil'/>
         </div>
       </div>
     );

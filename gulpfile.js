@@ -39,7 +39,6 @@ gulp.task('sass', function() {
 });
 
 
-
 var bundler = watchify(browserify({
     entries: [sourceFile],
     debug: true,
@@ -52,15 +51,23 @@ var bundler = watchify(browserify({
 bundler.on('update', rebundle);
 bundler.on('log', $.util.log);
 
-  function rebundle() {
-    return bundler.bundle()
-        // log errors if they happen
-        .on('error', $.util.log.bind($.util, 'Browserify Error'))
-        .pipe(source(destFileName))
-        .pipe(gulp.dest(destFolder))
-        .on('end', function() {
-            reload();
-        });
+gulp.task('fonts', function() {
+  return gulp.src(require('main-bower-files')({
+    filter: '**/*.{eot,svg,ttf,woff,woff2}'
+  }).concat('app/fonts/**/*')).pipe(gulp.dest('dist/fonts'));
+});
+
+
+
+function rebundle() {
+  return bundler.bundle()
+      // log errors if they happen
+      .on('error', $.util.log.bind($.util, 'Browserify Error'))
+      .pipe(source(destFileName))
+      .pipe(gulp.dest(destFolder))
+      .on('end', function() {
+          reload();
+      });
 }
 
 // Scripts
@@ -120,7 +127,7 @@ gulp.task('watch', ['bundle', 'images'], function() {
 });
 
 // Build
-gulp.task('build', ['buildBundle', 'images', 'extras'], function() {
+gulp.task('build', ['buildBundle', 'images', 'extras', 'fonts'], function() {
     gulp.src('dist/scripts/app.js')
         .pipe($.uglify())
         .pipe($.stripDebug())

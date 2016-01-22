@@ -104,8 +104,11 @@ var HorizontalSlider = React.createClass({
 
   render: function () {
     var leftOffset = this._pxFromValue(this.props.value) || 0,
-        cursorType = this.state.isDragging ? '-webkit-grabbing' : '-webkit-grab',
-        horizontalSliderTrackStyle = {cursor: cursorType},
+        cursorType = this.state.isDragging ? 'grabbing' : 'grab',
+        webkitCursorType =
+          this.state.isDragging ? '-webkit-grabbing' : '-webkit-grab',
+        horizontalSliderTrackStyle = {cursor: cursorType,
+                                      cursor: webkitCursorType},
         horizontalSliderThumbStyle = {left: leftOffset},
         horizontalSliderRangeStyle = {width: leftOffset};
 
