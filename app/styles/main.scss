@@ -1,5 +1,6 @@
 @import 'bootstrap.css';
 $ILLUMINATED_BUTTON_COLOR: #ACF3D5;
+$CONTROLS_BACKGROUND_COLOR: #474747;
 $CONTROLS_LIGHT_COLOR: #F6F1E6;
 $CONTROLS_LIGHT_FILL: #B6B3AA;
 // F6F1E6
@@ -76,7 +77,7 @@ body {
 }
 
 .controls {
-  background-color: #333;
+  background-color: $CONTROLS_BACKGROUND_COLOR;
   color: $CONTROLS_LIGHT_COLOR;
   height: 250px;
   width:75%;
@@ -126,7 +127,7 @@ body {
   .waveform-control-label {
     margin: 0;
     width: fit-content;
-    background-color: #333333;
+    background-color: $CONTROLS_BACKGROUND_COLOR;
     font-size: 12px;
     position: absolute;
     right:10px;
@@ -147,7 +148,7 @@ body {
   .label {
     margin: 0;
     width: fit-content;
-    background-color: #333333;
+    background-color: $CONTROLS_BACKGROUND_COLOR;
     font-size: 12px;
     position: absolute;
     right:10px;
@@ -272,7 +273,7 @@ body {
 .horizontal-slider-track {
   width: 90%;
   height: 6px;
-  background-color: #676767;
+  background-color: $CONTROLS_LIGHT_FILL;
   border: 1px solid #111;
   border-radius: 25px;
   position: absolute;
@@ -293,7 +294,7 @@ body {
   height: 22px;
   width: 8px;
   margin-left: -4px;
-  border: 1px solid #333;
+  border: 1px solid $CONTROLS_BACKGROUND_COLOR;
   border-radius: 2px;
   position: absolute;
   top: -9px;
@@ -322,7 +323,7 @@ div.record-button {
   height: 25px;
   background-color: #DDD;
   border-width: 1px;
-  border-color: #333;
+  border-color: $CONTROLS_BACKGROUND_COLOR;
   margin: auto;
   margin-right:2px;
   float:left;
@@ -366,14 +367,14 @@ div.record-button {
       left: 12px;
       border-style: solid;
       border-width: 7.5px 0 7.5px 15px;
-      border-color: transparent transparent transparent #333;
+      border-color: transparent transparent transparent $CONTROLS_BACKGROUND_COLOR;
     }
   }
 
   &.pause {
     &:before {
       content: "";
-      background: #333;
+      background: $CONTROLS_BACKGROUND_COLOR;
       display:inline-block;
       width: 5px;
       height: 15px;
@@ -383,7 +384,7 @@ div.record-button {
     }
     &:after {
       content: "";
-      background: #333;
+      background: $CONTROLS_BACKGROUND_COLOR;
       display:inline-block;
       width: 5px;
       height: 15px;
@@ -403,7 +404,7 @@ div.record-button {
       height:12%;
     }
     .recording-index-items {
-      border: 1px solid #111;
+      border: 1px solid $CONTROLS_LIGHT_COLOR;
       width:96%;
       margin: 0 2%;
       height:85%;
@@ -415,7 +416,7 @@ div.record-button {
         height: 28px;
         .recording-label-wrapper {
           background-color: $CONTROLS_LIGHT_COLOR;
-          color: #333;
+          color: $CONTROLS_BACKGROUND_COLOR;
           height: 100%;
           width: 92%;
           margin: 0 2%;
