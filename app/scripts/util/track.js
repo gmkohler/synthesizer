@@ -30,14 +30,16 @@ Track.prototype.play = function () {
   if (this.intervalID) { return;}
   this.interval = 1;
   var playbackStartTime = this.ctx.currentTime;
-  var currentNote = 0;
+  var rollIdx = 0;
 
   this.intervalID = setInterval(function () {
-    if (currentNote < this.roll.length) {
-      if ((this.ctx.currentTime - playbackStartTime) > this.roll[currentNote].timeSlice) {
-        // var currentNotes = this.roll[currentNote].notes;
-        currentNote++;
-        KeyActions.resetKeys(this.roll[currentNote].notes);
+    var currentTime = (this.ctx.currentTime - playbackStartTime);
+
+    if (this.roll[rollIdx]) {
+      var rollRunTime = this.roll[rollIdx].timeSlice;
+      if (currentTime > rollRunTime) {
+        KeyActions.resetKeys(this.roll[rollIdx].notes);
+        rollIdx += 1;
       }
     } else {
       clearInterval(this.intervalID);
