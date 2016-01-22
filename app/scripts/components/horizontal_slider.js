@@ -37,9 +37,11 @@ var HorizontalSlider = React.createClass({
     //
     // need to know mouseDown here because mouseMoves are detected on the document,
     // not the slider itself.  WE could pass to the slider?
-    var thumb = e.currentTarget,
-        trackWidth = thumb.parentElement.offsetWidth,
-        relX = e.pageX - (thumb.offsetLeft + thumb.offsetWidth/2);
+    var track = e.currentTarget,
+        trackWidth = track.offsetWidth,
+        relX = this._getOffsetLeft(track);
+
+    this._changeValue(e.pageX - relX);
     this.setState({isDragging: true,
                    rel: relX,
                    trackWidth: trackWidth
@@ -49,19 +51,7 @@ var HorizontalSlider = React.createClass({
  _handleMouseMove: function (e) {
    e.preventDefault();
    if (!this.state.isDragging) {return;}
-   var mouseValue = this._valueFromPx(e.pageX - this.state.rel),
-       minValue = this.props.minValue,
-       maxValue = this.props.maxValue,
-       currentValue = this.props.value;
-
-   if (minValue <= mouseValue && mouseValue <= maxValue) {
-     this.props.changeCallback(mouseValue);
-   } else if (mouseValue <= minValue && currentValue > minValue) {
-     this.props.changeCallback(minValue) ;
-   } else if (mouseValue >= maxValue && currentValue < maxValue) {
-     this.props.changeCallback(maxValue);
-   }
-
+   this._changeValue(e.pageX - this.state.rel);
  },
 
   _handleMouseUp: function (e) {
@@ -70,6 +60,30 @@ var HorizontalSlider = React.createClass({
                    });
     e.stopPropagation();
     e.preventDefault();
+  },
+
+  _getOffsetLeft: function (element) {
+    var offsetLeft = element.offsetLeft;
+    if (element.offsetParent) {
+      return offsetLeft + this._getOffsetLeft(element.offsetParent);
+    } else {
+      return offsetLeft;
+    }
+  },
+
+  _changeValue: function (pxFromLeft) {
+    var mouseValue = this._valueFromPx(pxFromLeft),
+        minValue = this.props.minValue,
+        maxValue = this.props.maxValue,
+        currentValue = this.props.value;
+
+    if (minValue <= mouseValue && mouseValue <= maxValue) {
+      this.props.changeCallback(mouseValue);
+    } else if (mouseValue <= minValue && currentValue > minValue) {
+      this.props.changeCallback(minValue) ;
+    } else if (mouseValue >= maxValue && currentValue < maxValue) {
+      this.props.changeCallback(maxValue);
+    }
   },
 
   _valueFromPx: function (px) {
@@ -95,11 +109,11 @@ var HorizontalSlider = React.createClass({
 
     return (
       <div className="horizontal-slider">
-        <div className="horizontal-slider-track">
+        <div className="horizontal-slider-track"
+             onMouseDown={this._handleMouseDown}>
           <div className="horizontal-slider-range"
                style={horizontalSliderRangeStyle}></div>
           <div className="horizontal-slider-thumb"
-               onMouseDown={this._handleMouseDown}
                style={horizontalSliderThumbStyle}></div>
         </div>
         <div className="horizontal-slider-label">

@@ -36,10 +36,11 @@ var VerticalSlider = React.createClass({
   },
 
   _getOffsetTop: function (element) {
+    var offsetTop = element.offsetTop;
     if (element.offsetParent) {
-      return element.offsetTop + this._getOffsetTop(element.offsetParent);
+      return offsetTop + this._getOffsetTop(element.offsetParent);
     } else {
-      return element.offsetTop;
+      return offsetTop;
     }
   },
 
@@ -48,6 +49,7 @@ var VerticalSlider = React.createClass({
 
     var track = e.currentTarget,
         relY = this.state.trackHeight + this._getOffsetTop(track);
+    this._changeValue(relY - e.pageY);
     this.setState({isDragging: true,
                    rel: relY
                  });
@@ -56,10 +58,22 @@ var VerticalSlider = React.createClass({
   _handleMouseMove: function (e) {
     e.preventDefault();
     if (!this.state.isDragging) {return;}
+    this._changeValue(this.state.rel - e.pageY);
+  },
+
+  _handleMouseUp: function (e) {
+    this.setState({isDragging: false,
+                   rel: null
+                   });
+    e.stopPropagation();
+    e.preventDefault();
+  },
+
+  _changeValue(pxFromBottom) {
     var maxValue = this.props.maxValue,
         minValue = this.props.minValue,
         // How many pixels from the bottom are we ?
-        mouseValue = this._valueFromPx(this.state.rel - e.pageY),
+        mouseValue = this._valueFromPx(pxFromBottom),
         currentValue = this.props.value;
 
     if (minValue <= mouseValue && mouseValue <= maxValue) {
@@ -69,14 +83,6 @@ var VerticalSlider = React.createClass({
     } else if (mouseValue >= maxValue && currentValue < maxValue) {
       this.props.changeCallback(maxValue);
     }
-  },
-
-  _handleMouseUp: function (e) {
-    this.setState({isDragging: false,
-                   rel: null
-                   });
-    e.stopPropagation();
-    e.preventDefault();
   },
 
   _valueFromPx: function (px) {
