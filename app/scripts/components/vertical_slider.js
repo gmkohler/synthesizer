@@ -102,12 +102,15 @@ var VerticalSlider = React.createClass({
 
   render: function () {
     var topOffset = this._pxFromValue(this.props.value) || 1,
+        cursorType = this.state.isDragging ? '-webkit-grabbing' : '-webkit-grab',
+        verticalSliderTrackStyle = {cursor: cursorType},
         verticalSliderThumbStyle = {top: topOffset},
         verticalSliderRangeStyle = {height: topOffset};
 
     return (
       <div className="vertical-slider">
         <div className="vertical-slider-track"
+             style={verticalSliderTrackStyle}
              onMouseDown={this._handleMouseDown}>
         <div className="vertical-slider-thumb"
              style={verticalSliderThumbStyle}></div>
