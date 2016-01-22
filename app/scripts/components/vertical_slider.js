@@ -35,11 +35,19 @@ var VerticalSlider = React.createClass({
     }
   },
 
+  _getOffsetTop: function (element) {
+    if (element.offsetParent) {
+      return element.offsetTop + this._getOffsetTop(element.offsetParent);
+    } else {
+      return element.offsetTop;
+    }
+  },
+
   _handleMouseDown: function (e) {
     if (e.button !== 0) {return;}
-    // var relX = e.currentTarget.parentElement.offsetLeft
-    var thumb = e.currentTarget,
-        relY = e.pageY - (thumb.offsetTop + thumb.offsetHeight/2);
+
+    var track = e.currentTarget,
+        relY = this.state.trackHeight + this._getOffsetTop(track);
     this.setState({isDragging: true,
                    rel: relY
                  });
@@ -48,10 +56,10 @@ var VerticalSlider = React.createClass({
   _handleMouseMove: function (e) {
     e.preventDefault();
     if (!this.state.isDragging) {return;}
-
     var maxValue = this.props.maxValue,
         minValue = this.props.minValue,
-        mouseValue = this._valueFromPx(e.pageY - this.state.rel),
+        // How many pixels from the bottom are we ?
+        mouseValue = this._valueFromPx(this.state.rel - e.pageY),
         currentValue = this.props.value;
 
     if (minValue <= mouseValue && mouseValue <= maxValue) {
@@ -75,8 +83,7 @@ var VerticalSlider = React.createClass({
     var valueRange = this.props.maxValue - this.props.minValue,
         scaleFactor = valueRange / this.state.trackHeight,
         pxOffset = this.props.isOffset ? (this.state.trackHeight / 2) : 0;
-
-    return (Math.round(this.state.trackHeight - px - pxOffset) * scaleFactor);
+    return (Math.round(px - pxOffset) * scaleFactor);
   },
 
   _pxFromValue: function (value) {
@@ -94,10 +101,10 @@ var VerticalSlider = React.createClass({
 
     return (
       <div className="vertical-slider">
-        <div className="vertical-slider-track">
+        <div className="vertical-slider-track"
+             onMouseDown={this._handleMouseDown}>
         <div className="vertical-slider-thumb"
-             style={verticalSliderThumbStyle}
-             onMouseDown={this._handleMouseDown}></div>
+             style={verticalSliderThumbStyle}></div>
         <div className="vertical-slider-range"
              style={verticalSliderRangeStyle}></div>
         </div>

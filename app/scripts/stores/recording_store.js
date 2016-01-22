@@ -57,7 +57,7 @@ function addRecording (recording) {
   if (!recording.name) {
     recording.name = 'recording ' + (recording.id + 1).toString();
   }
-  
+
   nextID += 1;
   _recordings.push(recording);
   RecordingStore._hasChanged();
@@ -66,6 +66,13 @@ function addRecording (recording) {
 function deleteRecording (recordingID) {
   var idx = findRecordingIndex(recordingID);
   _recordings.splice(idx, 1);
+  RecordingStore._hasChanged();
+}
+
+function editRecording (recording) {
+  debugger;
+  var idx = findRecordingIndex(recording.id);
+  _recordings.splice(idx, 1, recording);
   RecordingStore._hasChanged();
 }
 
