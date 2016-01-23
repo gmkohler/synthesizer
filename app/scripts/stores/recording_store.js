@@ -62,7 +62,6 @@ function addRecording (recording) {
 function deleteRecording (recordingID) {
   var idx = findRecordingIndex(recordingID);
   _recordings.splice(idx, 1);
-  nextID -= 1;
   RecordingStore._hasChanged();
 }
 

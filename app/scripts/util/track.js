@@ -6,6 +6,7 @@ var Track = function(ctx, options) {
   this.ctx = ctx;
   this.name = options.name || '';
   this.roll = options.roll || [];
+  this.rollIdx = NaN;
 };
 
 Track.prototype.startRecording = function() {
@@ -26,26 +27,38 @@ Track.prototype.stopRecording = function() {
   this.addNotes([]);
 };
 
-Track.prototype.play = function () {
-  if (this.intervalID) { return;}
+Track.prototype.play = function (endOfTrackCallback, shouldRepeat) {
+  if (this.intervalID) {return;}
   this.interval = 1;
-  var playbackStartTime = this.ctx.currentTime;
-  var rollIdx = 0;
+  var playbackStartTime = this.ctx.currentTime,
+      modNumber = shouldRepeat ? this.roll.length : 1;
+  if (!this.rollIdx) {this.rollIdx = 0;}
 
   this.intervalID = setInterval(function () {
     var currentTime = (this.ctx.currentTime - playbackStartTime);
 
-    if (this.roll[rollIdx]) {
-      var rollRunTime = this.roll[rollIdx].timeSlice;
+    if (this.roll[this.rollIdx]) {
+      var rollRunTime = this.roll[this.rollIdx].timeSlice;
       if (currentTime > rollRunTime) {
-        KeyActions.resetKeys(this.roll[rollIdx].notes);
-        rollIdx += 1;
+        KeyActions.resetKeys(this.roll[this.rollIdx].notes);
+        this.rollIdx = (this.rollIdx + 1) % modNumber;
+        if (this.rollIdx === 0) {playbackStartTime = this.ctx.currentTime;}
       }
     } else {
-      clearInterval(this.intervalID);
-      this.intervalID = null;
+        clearInterval(this.intervalID);
+        this.intervalID = null;
+        this.rollIdx = NaN;
+        endOfTrackCallback();
     }
   }.bind(this), this.interval);
+};
+
+Track.prototype.pause = function () {
+  if (!this.intervalID) {return;}
+  clearInterval(this.intervalID);
+  this.intervalID = null;
+
+  KeyActions.resetKeys({});
 };
 
 module.exports = Track;

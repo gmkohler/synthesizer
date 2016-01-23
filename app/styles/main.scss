@@ -462,13 +462,17 @@ body {
             }
             &.glyphicon-remove {
               right:2%;
-              &:before {
-              }
+              &:before {}
             }
-            &.glyphicon-play {
+            &.glyphicon-play,
+            &.glyphicon-pause {
               right:12%;
-              &:before {
-              }
+              &:before {}
+            }
+            &.glyphicon-repeat {
+              right:22%;
+              &:before{}
+              &.active{color:#333}
             }
           }
         }

@@ -11,6 +11,7 @@ var Recorder = React.createClass({
   getInitialState: function() {
     return({ isRecording: false,
               isPlaying: false,
+              playingID: null,
               track: new Track(this.props.ctx),
               recordings: []
             });
@@ -39,12 +40,15 @@ var Recorder = React.createClass({
   },
 
   togglePlay: function () {
-    this.setState({isPlaying: !this.state.isPlaying});
+    if (this.state.isPlaying) {
+      this.pausePlayback();
+    } else {
+      this.startPlayback();
+    }
   },
 
-  playRecording: function () {
-    this.state.track.play();
-  },
+  pausePlayback: function () {},
+  startPlayback: function () {},
 
   startRecording: function () {
     KeyStore.addChangeListener(this.updateTrack);
@@ -75,15 +79,19 @@ var Recorder = React.createClass({
       recordButtonStyle = {borderStyle: 'outset'};
     }
 
-    var playButtonClassName = 'record-button',
-        playButtonStyle;
-    if (this.state.isPlaying) {
-      playButtonClassName += ' pause';
-      playButtonStyle = {borderStyle: 'inset'};
-    } else {
-      playButtonClassName += ' play';
-      playButtonStyle = {borderStyle: 'outset'};
-    }
+    // var playButtonClassName = 'record-button',
+    //     playButtonStyle;
+    // if (this.state.isPlaying) {
+    //   playButtonClassName += ' pause';
+    //   playButtonStyle = {borderStyle: 'inset'};
+    // } else {
+    //   playButtonClassName += ' play';
+    //   playButtonStyle = {borderStyle: 'outset'};
+    // }
+    // 
+    // <div className={playButtonClassName}
+    //      style={playButtonStyle}
+    //      onClick={this.togglePlay}></div>
 
     return(
       <div className='recorder'>
@@ -92,12 +100,10 @@ var Recorder = React.createClass({
             <div className={recordButtonClassName}
                  style={recordButtonStyle}
                  onClick={this.toggleRecord}></div>
-            <div className={playButtonClassName}
-                 style={playButtonStyle}
-                 onClick={this.togglePlay}></div>
           </div>
         </div>
-        <RecordingIndex recordings={this.state.recordings}/>
+        <RecordingIndex togglePlay={this.togglePlay}
+                        recordings={this.state.recordings}/>
         <div className='label'>recordings</div>
       </div>
     );

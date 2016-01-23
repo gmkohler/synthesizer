@@ -18,15 +18,31 @@ var Recording = React.createClass({
   //   return ({isEditing: false,
   //             currentName: ''});
   // },
+  // _handleEdit: function () {
+  //   this.setState({isEditing: true,
+  //                  currentName: this.props.recording.name});
+  // },
 
-  _handlePlay: function () {
-    this.props.recording.play();
+  getInitialState: function (){
+    return ({
+      isPlaying: false,
+      repeat: false
+    });
   },
 
-  _handleEdit: function () {
-    this.setState({isEditing: true,
-                   currentName: this.props.recording.name});
+  _toggleRepeat: function () {
+    this.setState({repeat: !this.state.repeat});
   },
+
+  _togglePlay: function () {
+    if (this.state.isPlaying) {
+      this.props.recording.pause();
+    } else {
+      this.props.recording.play(this._togglePlay, this.state.repeat);
+    }
+    this.setState({isPlaying: !this.state.isPlaying});
+  },
+
 
   _handleChange: function (newValue) {
    this.setState({currentName: newValue});
@@ -61,15 +77,26 @@ var Recording = React.createClass({
                      </span>);
     //}
     // debugger;
-    var icons = [];
+    var icons = [],
+        playPauseClassName,
+        repeatClassName;
     if (typeof recording.id === 'number') {
-     icons = [
-       <i className='glyphicon glyphicon-play'
-          onClick={this._handlePlay}/>,
-       <i className='glyphicon glyphicon-remove'
-          onClick={this._deleteRecording}/>
+      playPauseClassName = 'glyphicon ' +
+        (this.state.isPlaying ? 'glyphicon-pause' : 'glyphicon-play');
+
+      repeatClassName = 'glyphicon glyphicon-repeat ' +
+        (this.state.repeat ? 'active' : '');
+
+      icons = [
+        <i className={repeatClassName}
+           onClick={this._toggleRepeat}/>,
+        <i className={playPauseClassName}
+           onClick={this._togglePlay}/>,
+        <i className='glyphicon glyphicon-remove'
+           onClick={this._deleteRecording}/>
       ];
     }
+
     return (
       <div className='recording'
            onClick={this._handleClick}>
