@@ -70,9 +70,16 @@ var Organ = React.createClass({
   },
 
   _handleKeyDown: function (e) {
-    var keyCodeName = KEY_CODE_NAMES[e.keyCode.toString()],
-        noteName = KEY_MAP[keyCodeName];
-    KeyActions.addKey(noteName);
+    // in case we are typing in the recording name form:
+    if (e.target.tagName === 'INPUT') {
+      debugger;
+      return;
+    // otherwise:
+    } else {
+      var keyCodeName = KEY_CODE_NAMES[e.keyCode.toString()],
+      noteName = KEY_MAP[keyCodeName];
+      KeyActions.addKey(noteName);
+    }
   },
 
   _handleKeyUp: function (e) {

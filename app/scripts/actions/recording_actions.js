@@ -16,4 +16,13 @@ module.exports = {
       payload: recordingID
     });
   }
+  // for when you want to implement editing of names:
+  //
+  // updateRecording: function (recording) {
+  //   AppDispatcher.dispatch({
+  //     actionType: RecordingConstants.UPDATE_RECORDING,
+  //     payload: recording
+  //   });
+  // }
+
 };

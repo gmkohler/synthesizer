@@ -29,6 +29,7 @@
     "gulp-webserver": "latest",
     "main-bower-files": "~2.6.2",
     "react": "latest",
+    "react-addons-linked-state-mixin": "^0.14.6",
     "react-dom": "latest",
     "react-tools": "latest",
     "reactify": "latest",

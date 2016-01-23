@@ -38,13 +38,9 @@ var RecordingStore = xtend(EventEmitter.prototype, {
     })
 });
 
-var _recordings = [
-    {id: 1, name: 'hi'},
-    {id: 2, name: 'hello'},
-    {id: 3, name: 'howdy'}
-];
+var _recordings = [];
 
-var nextID = _recordings.length;
+var nextID = _recordings.length + 1;
 
 function findRecordingIndex (recordingID) {
     return _recordings.findIndex(function (recording) {
@@ -55,7 +51,7 @@ function findRecordingIndex (recordingID) {
 function addRecording (recording) {
   recording.id = nextID;
   if (!recording.name) {
-    recording.name = 'recording ' + (recording.id + 1).toString();
+    recording.name = 'recording ' + (recording.id).toString();
   }
 
   nextID += 1;
@@ -66,11 +62,11 @@ function addRecording (recording) {
 function deleteRecording (recordingID) {
   var idx = findRecordingIndex(recordingID);
   _recordings.splice(idx, 1);
+  nextID -= 1;
   RecordingStore._hasChanged();
 }
 
 function editRecording (recording) {
-  debugger;
   var idx = findRecordingIndex(recording.id);
   _recordings.splice(idx, 1, recording);
   RecordingStore._hasChanged();

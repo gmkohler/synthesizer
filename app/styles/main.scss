@@ -325,7 +325,7 @@ body {
     .record-button {
       width: 40px;
       height: 25px;
-      background-color: #DDD;
+      background-color: #EEE;
       border-width: 1px;
       border-color: $CONTROLS_BACKGROUND_COLOR;
       margin: auto;
@@ -367,7 +367,7 @@ body {
           content: '';
           display: inline-block;
           position: relative;
-          bottom: 1px;
+          bottom: 2px;
           left: 12px;
           border-style: solid;
           border-width: 7.5px 0 7.5px 15px;
@@ -439,6 +439,18 @@ body {
             white-space:nowrap;
             text-overflow:ellipsis;
           }
+          // input.recording-label {
+          //   overflow: hidden;
+          //   display: inline-block;
+          //   white-space: nowrap;
+          //   text-overflow: ellipsis;
+          //   border: 1px solid #333;
+          //   height: 90%;
+          //   margin: 1% 0;
+          //   width: 80%;
+          //   line-height: 25px;
+          //   background-color: white;
+          // }
           .glyphicon {
             color: $CONTROLS_LIGHT_FILL;
             cursor: pointer;
@@ -453,7 +465,7 @@ body {
               &:before {
               }
             }
-            &.glyphicon-pencil {
+            &.glyphicon-play {
               right:12%;
               &:before {
               }
