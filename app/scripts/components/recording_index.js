@@ -11,7 +11,8 @@ var RecordingIndex = React.createClass({
 
   render: function () {
     var recordings = this.props.recordings.map(function (recording) {
-      return (<Recording recording={recording}/>);
+      return (<Recording key={recording.id}
+                         recording={recording}/>);
     });
 
     if (recordings.length === 0) {

@@ -49,6 +49,7 @@ var Recording = React.createClass({
   },
 
   _deleteRecording: function () {
+    if (this.state.isPlaying) {this._togglePlay();}
     RecordingActions.deleteRecording(this.props.recording.id);
   },
 
