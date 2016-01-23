@@ -11,6 +11,7 @@ var Note = function(context, frequency) {
 
   this.gainValue = AudioConstants.INITIAL_GAIN_VALUE;
   this.sustain = AudioConstants.INITIAL_SUSTAIN;
+  this.depth = AudioConstants.INITIAL_DEPTH;
   this.detuneValue = 0;
 
   this.attackDuration = AudioConstants.INITIAL_ATTACK;
@@ -19,19 +20,23 @@ var Note = function(context, frequency) {
 
   var that = this;
 
-  this.gainNode = (function () {
-    var ctx = that.ctx;
-    var gainNode = ctx.createGain();
-    gainNode.connect(ctx.destination);
+  this.gainNode = function () {
+    var gainNode = that.ctx.createGain();
+    // gainNode.connect(dest);
     return gainNode;
-  })();
+  };
 
-  this.oscillatorNode = function (freq, gainNode) {
+  this.carrierGain = new this.gainNode();
+  this.amGain = new this.gainNode();
+  this.amGain.connect(this.carrierGain.gain);
+  this.carrierGain.connect(this.ctx.destination);
+
+  this.oscillatorNode = function (freq, detune, gainNode) {
     var ctx = that.ctx,
         osc = ctx.createOscillator();
     osc.type = that.waveType;
     osc.frequency.setValueAtTime(freq, ctx.currentTime);
-    osc.detune.setValueAtTime(that.detuneValue, ctx.currentTime);
+    osc.detune.setValueAtTime(detune, ctx.currentTime);
     osc.connect(gainNode);
     return osc;
   };
@@ -50,6 +55,7 @@ Note.prototype.setType = function (waveType) {
   this.waveType = waveType;
   if (this.osc) {this.osc.type = waveType;}
 };
+
 Note.prototype.setModType = function (waveType) {
   this.modType = waveType;
   if (this.am) {this.am.type = waveType;}
@@ -67,6 +73,11 @@ Note.prototype.setGain = function (gain) {
 
 Note.prototype.setSustain = function (sustain) {
   this.sustain = sustain;
+};
+
+Note.prototype.setDepth = function (depth) {
+  this.depth = depth;
+  this.amGain.gain.setValueAtTime(depth, this.ctx.currentTime);
 };
 
 Note.prototype.setDetune = function (detune) {
@@ -90,24 +101,37 @@ Note.prototype.setRelease = function (duration) {
 Note.prototype._wax = function () {
 
   var now = this.ctx.currentTime,
-      gain = this.gainNode.gain;
+      carrierGain = this.carrierGain.gain,
+      amGain = this.amGain.gain;
 
-  this.osc = new this.oscillatorNode(this.carrierFreq, this.gainNode);
-  this.am = new this.modNode(this.modFreq, this.gainNode);
+  this.osc = new this.oscillatorNode(
+    this.carrierFreq,
+    this.detuneValue,
+    this.carrierGain
+  );
 
-  gain.cancelScheduledValues(0);
+  this.am = new this.oscillatorNode(
+    this.modFreq,
+    0, //detune value
+    this.amGain
+  );
+
+  amGain.cancelScheduledValues(0);
+  carrierGain.cancelScheduledValues(0);
   this.osc.start();
   this.am.start();
-  gain.setValueAtTime(0, now);
+  amGain.setValueAtTime(this.depth, now);
 
-  gain.linearRampToValueAtTime(
+  carrierGain.setValueAtTime(0, now);
+  carrierGain.linearRampToValueAtTime(
     this.gainValue,
     now + this.attackDuration
   );
-  // if sustain is greater than gain, we do not want the volume to grow past
-  //   the master gain. Thus:
+
+  // if sustain is greater than carrierGain, we do not want the volume to grow past
+  //   the master carrierGain. Thus:
   if (this.sustain < this.gainValue) {
-    gain.linearRampToValueAtTime(
+    carrierGain.linearRampToValueAtTime(
       this.sustain,
       now + this.attackDuration + this.decayDuration
     );
@@ -116,7 +140,7 @@ Note.prototype._wax = function () {
 
 Note.prototype._wane = function () {
   var now = this.ctx.currentTime,
-      gain = this.gainNode.gain;
+      gain = this.carrierGain.gain;
 
 
   gain.cancelScheduledValues(0);
@@ -129,6 +153,7 @@ Note.prototype._wane = function () {
   this.osc.stop(now + this.releaseDuration);
   this.am.stop(now + this.releaseDuration);
 
+  this.amGain.gain.linearRampToValueAtTime(0, now + this.releaseDuration);
   gain.linearRampToValueAtTime(0, now + this.releaseDuration);
 };
 

@@ -31,6 +31,7 @@ var Organ = React.createClass({
                  detune: 0,
                  attack: 0,
                   decay: 0,
+                  depth: 0,
                 release: 0,
              AMWaveform: AudioConstants.INITIAL_AM_WAVEFORM,
             AMFrequency: AudioConstants.INITIAL_AM_FREQUENCY
@@ -71,15 +72,15 @@ var Organ = React.createClass({
 
   _handleKeyDown: function (e) {
     // in case we are typing in the recording name form:
-    if (e.target.tagName === 'INPUT') {
-      debugger;
-      return;
+    // if (e.target.tagName === 'INPUT') {
+    //   debugger;
+    //   return;
     // otherwise:
-    } else {
+    // } else {
       var keyCodeName = KEY_CODE_NAMES[e.keyCode.toString()],
       noteName = KEY_MAP[keyCodeName];
       KeyActions.addKey(noteName);
-    }
+    // }
   },
 
   _handleKeyUp: function (e) {
@@ -129,6 +130,7 @@ var Organ = React.createClass({
                    attack={that.state.attack}
                    decay={that.state.decay}
                    release={that.state.release}
+                   depth={that.state.depth}
                    AMWaveform={that.state.AMWaveform}
                    AMFrequency={that.state.AMFrequency}
                    noteName={noteName} />);
@@ -145,7 +147,8 @@ var Organ = React.createClass({
                                  sustain={this.state.sustain}
                                  attack={this.state.attack}
                                  decay={this.state.decay}
-                                 release={this.state.release}/>
+                                 release={this.state.release}
+                                 depth={this.state.depth}/>
 
           </div>
           <div className='controls-center'>
@@ -164,7 +167,7 @@ var Organ = React.createClass({
             <Recorder ctx={this.ctx}/>
           </div>
         </div>
-        <div className='keyboard'>{keys}</div>
+        <div className='keyboard'>{keys.slice(0, 1)}</div>
       </div>
     );
   }

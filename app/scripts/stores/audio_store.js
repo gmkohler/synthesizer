@@ -58,6 +58,9 @@ var AudioStore = xtend(EventEmitter.prototype, {
       case AudioConstants.CHANGE_RELEASE:
         changeRelease(action.payload);
         break;
+      case AudioConstants.CHANGE_DEPTH:
+        changeDepth(action.payload);
+        break;
     }
   })
 });
@@ -70,6 +73,7 @@ var _configs = {waveform: AudioConstants.INITIAL_WAVEFORM,
                   attack: AudioConstants.INITIAL_ATTACK,
                    decay: AudioConstants.INITIAL_DECAY,
                  release: AudioConstants.INITIAL_RELEASE,
+                 depth: AudioConstants.INITIAL_DEPTH,
                   detune: AudioConstants.INITIAL_DETUNE
                 };
 
@@ -110,6 +114,11 @@ function changeDecay (decay) {
 
 function changeRelease (release) {
   _configs.release = release;
+  AudioStore._hasChanged();
+}
+
+function changeDepth (depth) {
+  _configs.depth = depth;
   AudioStore._hasChanged();
 }
 

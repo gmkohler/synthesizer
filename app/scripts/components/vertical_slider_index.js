@@ -39,7 +39,13 @@ var VerticalSliderIndex = React.createClass({
                         maxValue={AudioConstants.MAX_RELEASE_DURATION}
                         minValue={AudioConstants.MIN_RELEASE_DURATION}
                         changeCallback={AudioActions.changeRelease}
-                        handleKeyDown={this._handleKeyDown}
+                        isOffset={false}
+                        />
+        <VerticalSlider name="dep"
+                        value={this.props.depth}
+                        maxValue={AudioConstants.MAX_DEPTH}
+                        minValue={AudioConstants.MIN_DEPTH}
+                        changeCallback={AudioActions.changeDepth}
                         isOffset={false}
                         />
        <div className='label'>envelope</div>

@@ -50,16 +50,15 @@ var Key = React.createClass({
     if (newProps.detune !== this.props.detune) {
       this.note.setDetune(newProps.detune);
     }
+    if (newProps.depth !== this.props.depth) {
+      this.note.setDepth(newProps.depth);
+    }
   },
 
   render: function () {
     var active = this.props.isActive ? ' active' : '',
         flat = this.props.noteName.match('b') ? ' black': '',
-        keyLetter = TONE_LETTERS[this.props.noteName],
-        gainVal;
-        if (this.note) {
-            gainVal = this.note.gainNode.gain.value.toString();
-        }
+        keyLetter = TONE_LETTERS[this.props.noteName];
 
     return (<div id={this.props.noteName}
                  className={"key" + active + flat}

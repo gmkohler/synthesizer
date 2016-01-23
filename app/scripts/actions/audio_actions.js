@@ -38,6 +38,13 @@ module.exports = {
       payload: sustain
     });
   },
+  
+  changeDepth: function (depth) {
+    AppDispatcher.dispatch({
+      actionType: AudioConstants.CHANGE_DEPTH,
+      payload: depth
+    });
+  },
 
   changeAttack: function (attack) {
     AppDispatcher.dispatch({
