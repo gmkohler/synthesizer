@@ -19,6 +19,9 @@ body {
 }
 
 .keyboard {
+  position:absolute;
+  top:250px;
+  left:14.6%;
   margin:auto;
   width:fit-content;
   height: 224px;
@@ -75,12 +78,15 @@ body {
     left: 20%;
   }
 }
-
-.controls {
+.controls-wrapper {
   background-color: $CONTROLS_BACKGROUND_COLOR;
+  height:500px;
+  width:75%;
+}
+.controls {
   color: $CONTROLS_LIGHT_COLOR;
   height: 250px;
-  width:75%;
+  width:100%;
   border: 1px solid $CONTROLS_LIGHT_COLOR;
   padding:5px;
 
@@ -110,7 +116,7 @@ body {
   width:32%;
 }
 .controls-right {
-  width:32%;
+  width:33%;
 }
 
 .waveform-controls {
@@ -137,10 +143,11 @@ body {
 
 .waveform-controls,
 #vertical-sliders,
-.recorder {
+.recorder,
+.logo-wrapper {
   float:left;
   clear:both;
-  width:96%;
+  width:100%;
   position:relative;
   border: 1px solid $CONTROLS_LIGHT_COLOR;
   border-radius: 5px;
@@ -153,6 +160,18 @@ body {
     position: absolute;
     right:10px;
     bottom:-6px;
+  }
+}
+
+.logo-wrapper {
+  height:36.2%;
+  .logo {
+    width:100%;
+    height:100%;
+    background-image: url("../images/logo.png");
+    background-size: contain;
+    background-position-y: 50%;
+    background-repeat: no-repeat;
   }
 }
 
@@ -203,55 +222,63 @@ body {
 
 
 #vertical-sliders {
-  height:94%;
-  padding: 2% 5px 6% 5px;
-}
-
-.vertical-slider {
-  float:left;
-  margin: 0 8px;
-  position:relative;
   height:100%;
-  width:20px;
+  padding: 2% 5px 7% 5px;
+  .vertical-slider-wrapper {
+    width: fit-content;
+    height: 100%;
+    margin: auto;
+    .vertical-slider {
+      float:left;
+      margin: 0 8px;
+      position:relative;
+      height:100%;
+      width:20px;
+      .vertical-slider-track {
+        height:90%;
+        width:6px;
+        background-color:$CONTROLS_LIGHT_COLOR;
+        border: 1px solid #111;
+        border-radius: 25px;
+        position:absolute;
+        top:4%;
+        left:6px;
+      }
+      .vertical-slider-range {
+        width: 100%;
+        background-color: $CONTROLS_LIGHT_FILL;
+        border: none;
+        border-radius: 10px;
+        position:absolute;
+      }
+      .vertical-slider-thumb {
+        z-index: 2;
+        height: 8px;
+        width: 22px;
+        margin-top: -6px;
+        background-color: #EEEEEE;
+        border: 1px solid #111;
+        border-radius: 2px;
+        position: absolute;
+        left: -9px;
+      }
+      .vertical-slider-label {
+        position:absolute;
+        bottom:-2.5%;
+        left:2px;
+        font-size:10px;
+      }
+    }
+  }
 }
 
-.vertical-slider-track {
-  height:90%;
-  width:6px;
-  background-color:$CONTROLS_LIGHT_COLOR;
-  border: 1px solid #111;
-  border-radius: 25px;
-  position:absolute;
-  top:4%;
-  left:6px;
-}
 
-.vertical-slider-range {
-  width: 100%;
-  background-color: $CONTROLS_LIGHT_FILL;
-  border: none;
-  border-radius: 10px;
-  position:absolute;
-}
 
-.vertical-slider-thumb {
-  z-index: 2;
-  height: 8px;
-  width: 22px;
-  margin-top: -6px;
-  background-color: #EEEEEE;
-  border: 1px solid #111;
-  border-radius: 2px;
-  position: absolute;
-  left: -9px;
-}
 
-.vertical-slider-label {
-  position:absolute;
-  bottom:-2.5%;
-  left:2px;
-  font-size:10px;
-}
+
+
+
+
 
 .horizontal-sliders {
   width:100%;

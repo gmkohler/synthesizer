@@ -141,33 +141,40 @@ var Organ = React.createClass({
     //
     return (
       <div className='keytar'>
-        <div className='controls cf'>
-          <div className='controls-left'>
-            <VerticalSliderIndex gain={this.state.gain}
-                                 sustain={this.state.sustain}
-                                 attack={this.state.attack}
-                                 decay={this.state.decay}
-                                 release={this.state.release}
-                                 depth={this.state.depth}/>
+        <div className='controls-wrapper'>
+          <div className='controls cf'>
+            <div className='controls-left'>
+              <VerticalSliderIndex gain={this.state.gain}
+                                   sustain={this.state.sustain}
+                                   attack={this.state.attack}
+                                   decay={this.state.decay}
+                                   release={this.state.release}
+                                   depth={this.state.depth}/>
 
-          </div>
-          <div className='controls-center'>
-            <ModulatorControls waveform={this.state.AMWaveform}
-                               frequency={this.state.AMFrequency}
-                               />
-            <div className='waveform-controls'>
-              <WaveformSelector waveform={this.state.waveform}
-                                changeWaveform={AudioActions.changeWaveform}
-                                />
-              <DetuneSlider detune={this.state.detune}/>
-              <div className='waveform-control-label'>carrier</div>
+            </div>
+            <div className='controls-center'>
+              <ModulatorControls waveform={this.state.AMWaveform}
+                                 frequency={this.state.AMFrequency}
+                                 />
+              <div className='waveform-controls'>
+                <WaveformSelector waveform={this.state.waveform}
+                                  changeWaveform={AudioActions.changeWaveform}
+                                  />
+                <DetuneSlider detune={this.state.detune}/>
+                <div className='waveform-control-label'>carrier</div>
+              </div>
+              <div className='logo-wrapper'>
+                <div className='logo'>
+                  <div className='label'>g.m. kohler</div>
+                </div>
+              </div>
+            </div>
+            <div className='controls-right'>
+              <Recorder ctx={this.ctx}/>
             </div>
           </div>
-          <div className='controls-right'>
-            <Recorder ctx={this.ctx}/>
-          </div>
         </div>
-        <div className='keyboard'>{keys.slice(0, 1)}</div>
+        <div className='keyboard'>{keys}</div>
       </div>
     );
   }

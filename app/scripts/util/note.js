@@ -20,16 +20,14 @@ var Note = function(context, frequency) {
 
   var that = this;
 
-  this.gainNode = function () {
+  this.gainNode = function (dest) {
     var gainNode = that.ctx.createGain();
-    // gainNode.connect(dest);
+    gainNode.connect(dest);
     return gainNode;
   };
 
-  this.carrierGain = new this.gainNode();
-  this.amGain = new this.gainNode();
-  this.amGain.connect(this.carrierGain.gain);
-  this.carrierGain.connect(this.ctx.destination);
+  this.carrierGain = new this.gainNode(this.ctx.destination);
+  this.amGain = new this.gainNode(this.carrierGain.gain);
 
   this.oscillatorNode = function (freq, detune, gainNode) {
     var ctx = that.ctx,
@@ -39,15 +37,6 @@ var Note = function(context, frequency) {
     osc.detune.setValueAtTime(detune, ctx.currentTime);
     osc.connect(gainNode);
     return osc;
-  };
-
-  this.modNode = function (freq, gainNode) {
-    var ctx = that.ctx,
-        am = ctx.createOscillator();
-    am.type = that.modType;
-    am.frequency.setValueAtTime(freq, ctx.currentTime);
-    am.connect(gainNode.gain);
-    return am;
   };
 };
 
