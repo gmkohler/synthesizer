@@ -37,8 +37,7 @@ intuitive UI.
 ### Audio
 [ ] Support frequency modulation with a similar interface to amplitude modulation.
 
-[ ] Introduce a multiplier to each modulating oscillator for a wider variety of
-possible sounds.
+[ ] Introduce a multiplier to the frequency range of each modulating oscillator for a wider variety of possible sounds.
 
 [ ] Keep track of the audio configurations during recording so they persist during
 playback.
