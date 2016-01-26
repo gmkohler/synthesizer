@@ -15,7 +15,7 @@ Adjustable parameters for the carrier oscillator include:
 
 The Amplitude Modulator parameters that can be adjusted are:
 - Volume (a.k.a. 'depth', via the `dep` slider)
-- Frequency (a.k.a. 'depth', via the `frequency` slider )
+- Frequency (via the `frequency` slider with the amp. modulation box)
 
 ### JavaScript
 - The `Organ` component holds an `AudioContext` and listens to the `KeyStore` and `AudioStore` to update its state.  The audio parameters and an object of notes that are currently active are passed into a number of `Key` components as props.
