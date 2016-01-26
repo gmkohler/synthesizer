@@ -1,0 +1,469 @@
+@import url(bootstrap.css);
+body {
+  font-family: monospace;
+  font-size: 20px;
+}
+
+#app {
+  width: 85%;
+  margin: auto;
+}
+
+.keytar {
+  width: 100%;
+}
+
+.keyboard {
+  position: absolute;
+  top: 250px;
+  left: 14.6%;
+  margin: auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 224px;
+}
+
+.key {
+  background-color: white;
+  display: block;
+  float: left;
+  width: 50px;
+  height: 220px;
+  border: 2px solid;
+  border-style: outset;
+  border-radius: 5px;
+  position: relative;
+}
+.key.active {
+  border-style: inset;
+}
+.key span {
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+}
+
+.cf:after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.black {
+  position: relative;
+  /*left: -10%;*/
+  margin-left: -2%;
+  margin-right: -2%;
+  height: 120px;
+  width: 30px;
+  font-size: 80%;
+  z-index: 5;
+  background-color: black;
+  color: #FFFFFF;
+}
+.black span {
+  left: 20%;
+}
+
+.controls-wrapper {
+  background-color: #474747;
+  height: 500px;
+  width: 75%;
+}
+
+.controls {
+  color: #F6F1E6;
+  height: 250px;
+  width: 100%;
+  border: 1px solid #F6F1E6;
+  padding: 5px;
+}
+.controls .controls-left,
+.controls .controls-center,
+.controls .controls-right {
+  float: left;
+  height: 100%;
+}
+.controls .controls-left,
+.controls .controls-center {
+  margin-right: 10px;
+}
+
+.button-wrapper {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0px auto;
+}
+
+.controls-left {
+  width: 32%;
+}
+
+.controls-center {
+  width: 32%;
+}
+
+.controls-right {
+  width: 33%;
+}
+
+.waveform-controls {
+  position: relative;
+  margin-bottom: 6px;
+}
+.waveform-controls:last-child {
+  margin-bottom: 0;
+}
+.waveform-controls .waveform-selector,
+.waveform-controls .horizontal-slider {
+  width: 100%;
+  margin-bottom: 4px;
+}
+.waveform-controls .waveform-control-label {
+  margin: 0;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #474747;
+  font-size: 12px;
+  position: absolute;
+  right: 10px;
+  bottom: -6px;
+}
+
+.waveform-controls,
+#vertical-sliders,
+.recorder,
+.logo-wrapper {
+  float: left;
+  clear: both;
+  width: 100%;
+  position: relative;
+  border: 1px solid #F6F1E6;
+  border-radius: 5px;
+  padding: 2%;
+}
+.waveform-controls .label,
+#vertical-sliders .label,
+.recorder .label,
+.logo-wrapper .label {
+  margin: 0;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #474747;
+  font-size: 12px;
+  position: absolute;
+  right: 10px;
+  bottom: -6px;
+}
+
+.logo-wrapper {
+  height: 36.2%;
+}
+.logo-wrapper .logo {
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/logo.png");
+  background-size: contain;
+  background-position-y: 50%;
+  background-repeat: no-repeat;
+}
+
+.waveform-selector {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.waveform-selector .button-wrapper {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+.waveform-selector .button-wrapper .waveform-button {
+  background-color: #EEE;
+  background-size: cover;
+  background-position: center;
+  border: 3px solid;
+  border-style: outset;
+  height: 30px;
+  width: 50px;
+  margin-left: 3px;
+  float: left;
+  cursor: pointer;
+}
+.waveform-selector .button-wrapper .waveform-button:first-child {
+  margin: 0;
+}
+.waveform-selector .button-wrapper .waveform-button.active {
+  background-color: #ACF3D5;
+  border-color: #ACF3D5;
+}
+.waveform-selector .button-wrapper .waveform-button#sine {
+  background-image: url("../images/sine_wave.png");
+}
+.waveform-selector .button-wrapper .waveform-button#square {
+  background-image: url("../images/square_wave.png");
+}
+.waveform-selector .button-wrapper .waveform-button#sawtooth {
+  background-image: url("../images/sawtooth_wave.png");
+}
+.waveform-selector .button-wrapper .waveform-button#triangle {
+  background-image: url("../images/triangle_wave.png");
+}
+
+#vertical-sliders {
+  height: 100%;
+  padding: 2% 5px 7% 5px;
+}
+#vertical-sliders .vertical-slider-wrapper {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 100%;
+  margin: auto;
+}
+#vertical-sliders .vertical-slider-wrapper .vertical-slider {
+  float: left;
+  margin: 0 8px;
+  position: relative;
+  height: 100%;
+  width: 20px;
+}
+#vertical-sliders .vertical-slider-wrapper .vertical-slider .vertical-slider-track {
+  height: 90%;
+  width: 6px;
+  background-color: #F6F1E6;
+  border: 1px solid #111;
+  border-radius: 25px;
+  position: absolute;
+  top: 4%;
+  left: 6px;
+}
+#vertical-sliders .vertical-slider-wrapper .vertical-slider .vertical-slider-range {
+  width: 100%;
+  background-color: #B6B3AA;
+  border: none;
+  border-radius: 10px;
+  position: absolute;
+}
+#vertical-sliders .vertical-slider-wrapper .vertical-slider .vertical-slider-thumb {
+  z-index: 2;
+  height: 8px;
+  width: 22px;
+  margin-top: -6px;
+  background-color: #EEEEEE;
+  border: 1px solid #111;
+  border-radius: 2px;
+  position: absolute;
+  left: -9px;
+}
+#vertical-sliders .vertical-slider-wrapper .vertical-slider .vertical-slider-label {
+  position: absolute;
+  bottom: -2.5%;
+  left: 2px;
+  font-size: 10px;
+}
+
+.horizontal-sliders {
+  width: 100%;
+  padding-top: 5px;
+}
+
+.horizontal-sliders-wrapper {
+  width: 100%;
+}
+
+.horizontal-slider {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2px;
+  /*needs to be set because of absolute positioning of children*/
+  height: 20px;
+}
+
+.horizontal-slider-track {
+  width: 90%;
+  height: 6px;
+  background-color: #B6B3AA;
+  border: 1px solid #111;
+  border-radius: 25px;
+  position: absolute;
+  left: 4%;
+  top: 6px;
+}
+
+.horizontal-slider-range {
+  height: 100%;
+  background-color: #F6F1E6;
+  border: none;
+  border-radius: 10px;
+  position: absolute;
+}
+
+.horizontal-slider-thumb {
+  z-index: 2;
+  height: 22px;
+  width: 8px;
+  margin-left: -4px;
+  border: 1px solid #474747;
+  border-radius: 2px;
+  position: absolute;
+  top: -9px;
+  background-color: #EEEEEE;
+}
+
+.horizontal-slider-label {
+  position: absolute;
+  top: 13px;
+  left: 5%;
+  font-size: 10px;
+}
+
+.recorder {
+  height: 100%;
+  padding-bottom: 4%;
+}
+.recorder #recorder-buttons {
+  background-color: #B6B3AA;
+  width: 100%;
+  margin-bottom: 3%;
+  height: auto;
+  padding: 1% 0;
+  border-radius: 5px;
+}
+.recorder #recorder-buttons .record-button {
+  width: 40px;
+  height: 25px;
+  background-color: #EEE;
+  border-width: 1px;
+  border-color: #474747;
+  margin: auto;
+  margin-right: 2px;
+  float: left;
+  cursor: pointer;
+}
+.recorder #recorder-buttons .record-button.record:before {
+  content: '';
+  display: inline-block;
+  position: relative;
+  background: #CE0000;
+  border-radius: 100%;
+  width: 15px;
+  height: 15px;
+  left: 11px;
+  bottom: 1px;
+  cursor: pointer;
+}
+.recorder #recorder-buttons .record-button.stop:before {
+  content: '';
+  display: inline-block;
+  position: relative;
+  background: #CE0000;
+  width: 15px;
+  height: 15px;
+  left: 11px;
+  bottom: 1px;
+  cursor: pointer;
+}
+.recorder #recorder-buttons .record-button.play:after {
+  content: '';
+  display: inline-block;
+  position: relative;
+  bottom: 2px;
+  left: 12px;
+  border-style: solid;
+  border-width: 7.5px 0 7.5px 15px;
+  border-color: transparent transparent transparent #474747;
+}
+.recorder #recorder-buttons .record-button.pause:before {
+  content: "";
+  background: #474747;
+  display: inline-block;
+  width: 5px;
+  height: 15px;
+  position: relative;
+  bottom: 1px;
+  left: 12px;
+}
+.recorder #recorder-buttons .record-button.pause:after {
+  content: "";
+  background: #474747;
+  display: inline-block;
+  width: 5px;
+  height: 15px;
+  position: relative;
+  bottom: 1px;
+  left: 16px;
+}
+.recorder .recording-index {
+  height: 82%;
+  width: 100%;
+  background-color: #B6B3AA;
+  border-radius: 5px;
+}
+.recorder .recording-index .recording-index-items {
+  width: 100%;
+  height: 100%;
+  padding: 2%;
+  overflow-y: scroll;
+}
+.recorder .recording-index .recording-index-items .recording {
+  padding: 2px 0;
+  height: 20%;
+}
+.recorder .recording-index .recording-index-items .recording .recording-label-wrapper {
+  border: 1px solid #333;
+  border-radius: 2px;
+  background-color: #F6F1E6;
+  color: #474747;
+  height: 100%;
+  width: 100%;
+  padding: 0 2%;
+  font-size: 16px;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  position: relative;
+}
+.recorder .recording-index .recording-index-items .recording .recording-label-wrapper .recording-label {
+  overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.recorder .recording-index .recording-index-items .recording .recording-label-wrapper .glyphicon {
+  color: #B6B3AA;
+  cursor: pointer;
+  font-size: 14px;
+  position: absolute;
+  top: 7px;
+}
+.recorder .recording-index .recording-index-items .recording .recording-label-wrapper .glyphicon:hover {
+  color: #333;
+}
+.recorder .recording-index .recording-index-items .recording .recording-label-wrapper .glyphicon.glyphicon-remove {
+  right: 2%;
+}
+.recorder .recording-index .recording-index-items .recording .recording-label-wrapper .glyphicon.glyphicon-play, .recorder .recording-index .recording-index-items .recording .recording-label-wrapper .glyphicon.glyphicon-pause {
+  right: 12%;
+}
+.recorder .recording-index .recording-index-items .recording .recording-label-wrapper .glyphicon.glyphicon-repeat {
+  right: 22%;
+}
+.recorder .recording-index .recording-index-items .recording .recording-label-wrapper .glyphicon.glyphicon-repeat.active {
+  color: #333;
+}
