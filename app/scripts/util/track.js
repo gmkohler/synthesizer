@@ -31,7 +31,12 @@ Track.prototype.play = function (endOfTrackCallback, shouldRepeat) {
   if (this.intervalID) {return;}
   this.interval = 1;
   var playbackStartTime = this.ctx.currentTime,
-      modNumber = shouldRepeat ? this.roll.length : 1;
+  /* if the track should repeat, this modding will prevent the rollIdx
+     from leaving the range of this.roll. Otherwise it will allow it to
+     exceed the range by one, thereby escaping the first logic clause in the
+     interval function.
+  */
+      modNumber = shouldRepeat ? this.roll.length : (this.roll.length + 1);
   if (!this.rollIdx) {this.rollIdx = 0;}
 
   this.intervalID = setInterval(function () {

@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var LinkedStateMixin = require('react-addons-linked-state-mixin');
+// var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var RecordingActions = require('../actions/recording_actions');
 
@@ -89,11 +89,14 @@ var Recording = React.createClass({
         (this.state.repeat ? 'active' : '');
 
       icons = [
-        <i className={repeatClassName}
+        <i key='repeat'
+           className={repeatClassName}
            onClick={this._toggleRepeat}/>,
-        <i className={playPauseClassName}
+        <i key='play-pause'
+           className={playPauseClassName}
            onClick={this._togglePlay}/>,
         <i className='glyphicon glyphicon-remove'
+           key='remove'
            onClick={this._deleteRecording}/>
       ];
     }

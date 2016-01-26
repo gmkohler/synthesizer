@@ -17,7 +17,8 @@ var RecordingIndex = React.createClass({
 
     if (recordings.length === 0) {
       var blankRecording = {name: '(no recordings)'};
-      recordings.push(<Recording recording={blankRecording}/>);
+      recordings.push(<Recording key='blank-recording'
+                                 recording={blankRecording}/>);
     }
 
     return (
